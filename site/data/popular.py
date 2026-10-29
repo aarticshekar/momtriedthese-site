@@ -58,6 +58,15 @@ POP = [
  ("marigold-garland","Artificial Marigold Garland, 5 Pack","B0851F7XR1","diwali","Five long marigold garlands for doors, railings and the puja corner. Reusable every year.","Doors and railings","3K+","door"),
  ("led-tealights","PUNPUBA LED Tea Lights, 24 Pack","B0DQKZJJQY","diwali","Flameless diyas for the balcony and anywhere little hands can reach.","Kid-safe glow","6K+","light"),
  ("marigold-heads","Artificial Marigold Flower Heads","B07XF9QQGN","diwali","Loose marigold heads for rangoli, urli bowls and the table.","Rangoli, urli","","door"),
+ # Diwali: gifts to take, and things kids make
+ ("lotus-tealight","Tied Ribbons Lotus Tealight Holders, Set of 7","B0D63791TG","diwali","Seven lotus tealight holders. Pretty enough to gift, cheap enough to gift twice.","Hosts, teachers","700+","give"),
+ ("diya-urli-pair","Tied Ribbons Diya Urli Bowls, Set of 2","B0BG8BP3YL","diwali","Two gold diya-shaped bowls for floating flowers and tealights. The host gift that stays out all year.","Hosts","700+","give"),
+ ("soan-papdi","Haldiram's Soan Papdi (500g)","B012S2K6XI","diwali","The box everyone pretends to be tired of, and finishes anyway.","Visits, the office","100+","give"),
+ ("rangoli-sand-art","Kulture Khazana Rangoli Sand Art Kit","B0CK2PNZC8","diwali","Rangoli on a board, so the glitter stays on the board. A kid-sized Diwali job.","Ages 5 and up","200+","kids"),
+ ("rangoli-puzzle","Kulture Khazana Rangoli Floor Puzzle (48 pc, 32 in)","B08NLZXXHW","diwali","A giant round rangoli puzzle for the floor. Big pieces, so the little cousins can help too.","Ages 3 and up","100+","kids"),
+ ("moon-lamp","HOLA Paint Your Own Moon Lamp","B0DFW9KNR8","diwali","They paint it, it glows. A festival of lights gift that ends up on the bedside table.","Ages 6 to 12","2K+","kids"),
+ ("binnys-diwali","Binny's Diwali by Thrity Umrigar","1338364480","diwali","A girl tells her class about Diwali. Lovely for kids growing up far from home.","Ages 4 to 8","","kids"),
+ ("golden-diwali","Diwali: A Festival of Lights (Little Golden Book)","0593703871","diwali","The story of Diwali in a book small enough for a return gift bag.","Ages 2 to 6","","kids"),
 ]
 # existing products that are also top sellers right now (monthly buyers on Amazon US, 29 Oct 2026)
 POPULAR_EXISTING = {"airbrush": "20K+", "flip-7": "20K+", "uno": "20K+", "taco-cat": "10K+", "spot-it": "20K+", "hues-cues": "",
@@ -73,5 +82,5 @@ GIFT_SEC = {"lego-advent-marvel": "advent", "lego-advent-starwars": "advent", "l
  "marigold-toran": "door", "satya-incense": "corner", "kaju-katli": "sweet", "besan-ladoo": "sweet", "kurta-pyjama": "sweet"}
 SECTIONS = {
  "christmas": [("advent", "Advent calendars", "These sell out first. Most are gone by mid-November."), ("tree", "The big one, under the tree", "One proper gift that gets played with past Boxing Day."), ("stocking", "Stocking stuffers", "Small, cheap, actually used.")],
- "diwali": [("light", "Light it up", "All the glow, kid-safe."), ("door", "The door and the table", "So the whole building knows."), ("corner", "The puja corner", "Small, but proper."), ("sweet", "Mithai and something new to wear", "For guests. And the photos.")],
+ "diwali": [("light", "Light it up", "All the glow, kid-safe."), ("door", "The door and the table", "So the whole building knows."), ("corner", "The puja corner", "Small, but proper."), ("sweet", "Mithai and something new to wear", "For guests. And the photos."), ("give", "Gifts to take when you visit", "Because turning up empty-handed is not an option."), ("kids", "For the kids: a Diwali they make", "Rangoli, lights and stories, so the festival is theirs too.")],
 }
