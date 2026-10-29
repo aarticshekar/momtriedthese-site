@@ -12,4 +12,4 @@ $new = !file_exists($file);
 $fh = @fopen($file, 'a');
 if ($fh) { if (flock($fh, LOCK_EX)) { if ($new) fputcsv($fh, ['date','email','name','source']); fputcsv($fh, [gmdate('c'), $email, $name, $src]); flock($fh, LOCK_UN); } fclose($fh); }
 @mail($notify, 'New Keepers signup: ' . $email, "Email: $email\nName: $name\nFrom page: $src\n", "From: Mom Tried These <hello@momtriedthese.com>\r\nContent-Type: text/plain; charset=UTF-8\r\n");
-header('Location: /subscribed/'); exit;
+header('Location: ' . (strpos($src, '/shortlist') === 0 ? '/shortlist/thanks/' : '/subscribed/')); exit;

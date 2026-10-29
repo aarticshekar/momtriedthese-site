@@ -2,4 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /contact.php
 Disallow: /subscribe.php
+Disallow: /shortlist/thanks/
+Disallow: /shortlist/mtt-christmas-shortlist-2026.pdf
 Sitemap: https://momtriedthese.com/sitemap.xml
