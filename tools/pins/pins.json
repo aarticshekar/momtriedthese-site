@@ -240,6 +240,116 @@
   "published": "2026-10-29"
  },
  {
+  "id": "gifts-10",
+  "board": "Christmas Gifts for Kids",
+  "board_id": "1123507506982411176",
+  "link": "/journal/gifts-for-10-year-olds/",
+  "k": "Gifts by age · 10",
+  "t": "Gifts for 10 year olds that aren't a screen",
+  "s": "Coding, chemistry and the big build.",
+  "img": [
+   "apitor",
+   "solar-robot",
+   "magic-chemistry",
+   "lego-creeper"
+  ],
+  "title": "Gifts for 10 Year Olds That Aren't Another Screen",
+  "desc": "Coding robots, experiments, games for the whole table and the big Minecraft build. No new device needed.",
+  "image_url": "https://raw.githubusercontent.com/aarticshekar/momtriedthese-site/factory/site/static/pins/gifts-10.jpg",
+  "url": "https://momtriedthese.com/journal/gifts-for-10-year-olds/",
+  "description": "Coding robots, experiments, games for the whole table and the big Minecraft build. No new device needed. Picked by Mom Tried These. Affiliate links on the page.",
+  "wave": 2,
+  "status": "queued"
+ },
+ {
+  "id": "gifts-9",
+  "board": "Christmas Gifts for Kids",
+  "board_id": "1123507506982411176",
+  "link": "/journal/gifts-for-9-year-olds/",
+  "k": "Gifts by age · 9",
+  "t": "Gifts for 9 year olds: bigger builds",
+  "s": "Too old for toys, too young to say so.",
+  "img": [
+   "crunchlabs",
+   "robotic-hand",
+   "geodes",
+   "speed-cube"
+  ],
+  "title": "Gifts for 9 Year Olds: Bigger Builds and Brain Teasers",
+  "desc": "Engineering kits, puzzles that take a week and games that need a poker face, for the nine year old in between.",
+  "image_url": "https://raw.githubusercontent.com/aarticshekar/momtriedthese-site/factory/site/static/pins/gifts-9.jpg",
+  "url": "https://momtriedthese.com/journal/gifts-for-9-year-olds/",
+  "description": "Engineering kits, puzzles that take a week and games that need a poker face, for the nine year old in between. Picked by Mom Tried These. Affiliate links on the page.",
+  "wave": 2,
+  "status": "queued"
+ },
+ {
+  "id": "gifts-8",
+  "board": "Christmas Gifts for Kids",
+  "board_id": "1123507506982411176",
+  "link": "/journal/gifts-for-8-year-olds/",
+  "k": "Gifts by age · 8",
+  "t": "Gifts for 8 year olds who have everything",
+  "s": "What's missing is a real project.",
+  "img": [
+   "snap-circuits",
+   "gear-bots",
+   "rock-painting",
+   "flip-7"
+  ],
+  "title": "Gifts for 8 Year Olds Who Have Everything",
+  "desc": "Circuits, builds, card games with strategy and books they finish: real projects for an eight year old.",
+  "image_url": "https://raw.githubusercontent.com/aarticshekar/momtriedthese-site/factory/site/static/pins/gifts-8.jpg",
+  "url": "https://momtriedthese.com/journal/gifts-for-8-year-olds/",
+  "description": "Circuits, builds, card games with strategy and books they finish: real projects for an eight year old. Picked by Mom Tried These. Affiliate links on the page.",
+  "wave": 2,
+  "status": "queued"
+ },
+ {
+  "id": "gifts-7",
+  "board": "Christmas Gifts for Kids",
+  "board_id": "1123507506982411176",
+  "link": "/journal/gifts-for-7-year-olds/",
+  "k": "Gifts by age · 7",
+  "t": "Gifts for 7 year olds who want a challenge",
+  "s": "Not too easy, not too hard.",
+  "img": [
+   "lego-spider",
+   "super-slide",
+   "funcils",
+   "bananagrams"
+  ],
+  "title": "Gifts for 7 Year Olds: Things They Can Do on Their Own",
+  "desc": "Seven wants independence and a bit of challenge: builds, real art supplies, word games and books they finish.",
+  "image_url": "https://raw.githubusercontent.com/aarticshekar/momtriedthese-site/factory/site/static/pins/gifts-7.jpg",
+  "url": "https://momtriedthese.com/journal/gifts-for-7-year-olds/",
+  "description": "Seven wants independence and a bit of challenge: builds, real art supplies, word games and books they finish. Picked by Mom Tried These. Affiliate links on the page.",
+  "wave": 2,
+  "status": "queued"
+ },
+ {
+  "id": "gifts-6",
+  "board": "Christmas Gifts for Kids",
+  "board_id": "1123507506982411176",
+  "link": "/journal/gifts-for-6-year-olds/",
+  "k": "Gifts by age · 6",
+  "t": "Gifts for 6 year olds that still get played with",
+  "s": "Things they can start and finish on their own.",
+  "img": [
+   "lego-shuttle",
+   "magnetic-tiles",
+   "aqua-puffs",
+   "taco-cat"
+  ],
+  "title": "Gifts for 6 Year Olds That Still Get Played With in January",
+  "desc": "Building, making, playing and reading for a six year old who wants to do it all themselves. Every pick has a reason.",
+  "image_url": "https://raw.githubusercontent.com/aarticshekar/momtriedthese-site/factory/site/static/pins/gifts-6.jpg",
+  "url": "https://momtriedthese.com/journal/gifts-for-6-year-olds/",
+  "description": "Building, making, playing and reading for a six year old who wants to do it all themselves. Every pick has a reason. Picked by Mom Tried These. Affiliate links on the page.",
+  "wave": 2,
+  "status": "queued"
+ },
+ {
   "id": "diwali-safe-lights",
   "board": "Diwali with Kids",
   "link": "/gifts/diwali/#light",
