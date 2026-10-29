@@ -187,7 +187,11 @@ SEASON = sorted([g for g in GIFT.values() if live(g) and g['slug'] != 'party-fav
 # ---- Home
 FAV = ['smiggle-minecraft-lunch', 'yoto', 'train-of-thought', 'rose-mist', 'magnetic-tiles', 'jbl-junior', 'lego-advent-starwars', 'paniyaram-pan']
 fav = [SHOWN[s] for s in FAV if s in SHOWN][:6]
-TOPPOP = [p for p in sorted([p for p in SHOWN.values() if p['home'] in COLL and p.get('pop')], key=popn, reverse=True) if p not in fav][:6]
+TOPPOP, _seen = [], set()
+for p in sorted([p for p in SHOWN.values() if p.get('pop') and p['home'] not in ('fast-kitchen', 'just-for-you', 'party-favors')], key=popn, reverse=True):
+    if p['home'] in _seen or p in fav: continue
+    TOPPOP.append(p); _seen.add(p['home'])
+TOPPOP = TOPPOP[:6]
 slides = ''.join(f'''<a class="slide{' on' if i == 0 else ''}" href="/gifts/{g['slug']}/" style="--w:url(/img/c/{g['slug']}-wide.jpg);--q:url(/img/c/{g['slug']}.jpg)"><div class="sc"><span class="k">{E(g['kicker'])}</span><h2>{E(g['banner'])}</h2><p>{E(g['role'])}</p><span class="go">Open the list <span aria-hidden="true">→</span></span></div></a>''' for i, g in enumerate(SEASON))
 dots = ''.join(f'<button class="{"on" if i == 0 else ""}" aria-label="Show banner {i + 1}"></button>' for i in range(len(SEASON)))
 START = ['quiet-hour', 'lunchbox', 'travel-day', 'game-night', 'fast-kitchen', 'just-for-you']
