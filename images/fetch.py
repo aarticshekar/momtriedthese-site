@@ -106,7 +106,7 @@ for slug,src in rows:
         elif kind in ('q','book'):
             if kind=='book':
                 try: b,u=book(val); fit(b,dst); log.append([slug,'ok',u]); continue
-                except Exception: q,dom=val.replace(' by ',' ')+' book cover',None
+                except Exception as e: log.append([slug,'fail','book: no Open Library cover, add a urls: line by hand']); continue
             else: q,_,dom=val.partition('|'); dom=dom or None
             err=None; done=False
             for mu,pu in bing_images(q,dom):
