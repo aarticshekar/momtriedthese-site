@@ -4,6 +4,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dat
 HERE = os.path.dirname(os.path.abspath(__file__)); os.chdir(HERE)
 from catalog import COLLECTIONS, GIFTS, P as CAT
 from journal import J
+from popular import POP, POPULAR_EXISTING, GIFT_SEC, SECTIONS
 from picks2 import P2
 from picks3 import P3, BOUGHT_EXISTING
 from PIL import Image
@@ -28,7 +29,18 @@ for slug, src, disp, home, why, best, _ in CAT:
     if not us_ and not ae_: us_ = ASIN.get(src)
     img = os.path.exists(f'{IMGSRC}/{slug}.jpg')
     PR[slug] = dict(slug=slug, src=src, name=disp, home=home, why=why, best=best, us=us_, ae=ae_,
-                    bought=src in BOUGHT, img=img)
+                    bought=src in BOUGHT, img=img, pop=POPULAR_EXISTING.get(slug), sec=GIFT_SEC.get(slug, ''))
+for slug, disp, asin, home, why, best, cnt, sec in POP:
+    PR[slug] = dict(slug=slug, src=disp, name=disp, home=home, why=why, best=best, us=asin, ae=None, bought=False,
+                    img=os.path.exists(f'{IMGSRC}/{slug}.jpg'), pop=cnt or 'top', sec=sec)
+# vegetarian site: no egg or meat products
+for s in ('egg-cooker',): PR.pop(s, None)
+# the Smiggle bottle we bought is the Minecraft one
+PR['smiggle-spritz'].update(name='Smiggle Minecraft Spritz Bottle', us=None, ae=None, src='Smiggle Minecraft spritz drink bottle',
+    why="We bought this one, in Minecraft. A water bottle that also sprays a cool mist. On hot days, that's the feature that matters.")
+def popn(p):
+    v = p.get('pop') or ''; m = re.match(r'([\d.]+)K', v)
+    return float(m.group(1)) * 1000 if m else (float(v.rstrip('+')) if v[:1].isdigit() else (500 if v == 'top' or v == '' and p.get('pop') is not None else 0))
 SHOWN = {s: p for s, p in PR.items() if p['img']}
 def q(n): return re.sub(r'\s+', '+', re.sub(r"[()'&!:,]", ' ', n).strip())
 def link_us(p): return f"https://www.amazon.com/dp/{p['us']}?tag={US}" if p['us'] else f"https://www.amazon.com/s?k={q(p['src'])}&tag={US}"
@@ -91,7 +103,7 @@ def head(title, desc, path, schema=(), img="/og.jpg", noindex=False):
 <title>{E(t)}</title><meta name="description" content="{E(desc)}"><link rel="canonical" href="{url}">{'<meta name="robots" content="noindex">' if noindex else ''}
 <meta property="og:type" content="website"><meta property="og:site_name" content="Mom Tried These"><meta property="og:title" content="{E(t)}"><meta property="og:description" content="{E(desc)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}{img}"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Mom Tried These">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/lora-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/s3.css?v={TODAY}">{sch}</head><body>
 <header class="top"><div class="wrap bar"><a class="logo" href="/">Mom Tried These</a><nav>{nav}</nav></div></header>'''
 FOOT = f'''<section class="keep"><div class="wrap keepin"><div><p class="k">The monthly short list</p><h2>One email a month. Only the things that earned a spot.</h2><p>No daily deals, no countdown timers. Unsubscribe in one click.</p></div>
@@ -111,7 +123,7 @@ var f=document.querySelectorAll('.filt button');f.forEach(function(b){{b.onclick
 def card(p, n=None, big=False):
     lab = '<span class="lab own">We bought this</span>' if p['bought'] else '<span class="lab">Shortlisted</span>'
     return f'''<article class="card{' big' if big else ''}" id="{p['slug']}"><div class="ph"><img src="/img/p/{p['slug']}.jpg" alt="{E(p['name'])}" width="640" height="640" loading="lazy"></div>
-<div class="cb">{f'<span class="n">{n:02d}</span>' if n else ''}{lab}<h3>{E(p['name'])}</h3><p>{E(re.sub(r'^We bought (this|these|this one)\. ', '', p['why']))}</p><p class="best">{E(p['best'])}</p>
+<div class="cb">{f'<span class="n">{n:02d}</span>' if n else ''}{lab}<h3>{E(p['name'])}</h3><p>{E(re.sub(r'^We bought (this|these|this one)\. ', '', p['why']))}</p><p class="best">{E(p['best'])}</p>{f'<p class="pop">{E(p["pop"])} bought last month on Amazon</p>' if p.get('pop') and p['pop'] not in ('top',) and p['pop'][:1].isdigit() else ('<p class="pop">A top seller on Amazon right now</p>' if p.get('pop') is not None and p.get('pop') in ('top', '') else '')}
 <a class="buy" rel="sponsored nofollow noopener" target="_blank" href="{link_ae(p)}" data-ae="{link_ae(p)}" data-us="{link_us(p)}">Check the price <span aria-hidden="true">↗</span></a></div></article>'''
 
 def crumbs(items):
@@ -152,7 +164,7 @@ for o in J:
     if o['kind'] == 'note':
         from PIL import ImageDraw, ImageFont
         im = Image.new('RGB', (1200, 800), JTINT['note']); d = ImageDraw.Draw(im)
-        try: fnt = ImageFont.truetype('static/fraunces.ttf', 64)
+        try: fnt = ImageFont.truetype('static/lora.ttf', 60)
         except Exception: fnt = ImageFont.load_default()
         pull = re.sub(r'\s+', ' ', [l for l in o['body'].split('\n') if l.strip() and not l.startswith(('#', '-', '['))][0]).strip()
         if len(pull) > 90: pull = pull[:pull.rfind(' ', 0, 88)] + '...'
@@ -175,6 +187,7 @@ SEASON = sorted([g for g in GIFT.values() if live(g) and g['slug'] != 'party-fav
 # ---- Home
 FAV = ['smiggle-minecraft-lunch', 'yoto', 'train-of-thought', 'rose-mist', 'magnetic-tiles', 'jbl-junior', 'lego-advent-starwars', 'paniyaram-pan']
 fav = [SHOWN[s] for s in FAV if s in SHOWN][:6]
+TOPPOP = [p for p in sorted([p for p in SHOWN.values() if p['home'] in COLL and p.get('pop')], key=popn, reverse=True) if p not in fav][:6]
 slides = ''.join(f'''<a class="slide{' on' if i == 0 else ''}" href="/gifts/{g['slug']}/" style="--w:url(/img/c/{g['slug']}-wide.jpg);--q:url(/img/c/{g['slug']}.jpg)"><div class="sc"><span class="k">{E(g['kicker'])}</span><h2>{E(g['banner'])}</h2><p>{E(g['role'])}</p><span class="go">Open the list <span aria-hidden="true">→</span></span></div></a>''' for i, g in enumerate(SEASON))
 dots = ''.join(f'<button class="{"on" if i == 0 else ""}" aria-label="Show banner {i + 1}"></button>' for i in range(len(SEASON)))
 START = ['quiet-hour', 'lunchbox', 'travel-day', 'game-night', 'fast-kitchen', 'just-for-you']
@@ -185,6 +198,7 @@ home = head("Mom Tried These: The Short List for Busy Moms", "A short, honest li
 <section class="wrap"><div class="slides">{slides}<div class="dots">{dots}</div></div></section>
 <section class="wrap sec"><div class="sh"><h2>Start with what you need</h2><a href="/collections/">All collections</a></div><div class="tiles">
 {''.join(f'<a class="tile" href="/collections/{s}/"><img src="/img/c/{s}.jpg" alt="" width="900" height="900" loading="lazy"><span class="k">{E(COLL[s]["kicker"])}</span><h3>{E(COLL[s]["title"])}</h3></a>' for s in START)}</div></section>
+<section class="wrap sec"><div class="sh"><h2>Most bought this month</h2><a href="/collections/">See every collection</a></div><p class="subf">What parents are actually buying right now, from the collections below. We checked the numbers so you don't have to.</p><div class="grid g3">{''.join(card(p) for p in TOPPOP)}</div></section>
 <section class="wrap sec"><div class="sh"><h2>Our favourites right now</h2></div><p class="subf">If you only look at six things, look at these.</p><div class="grid g3">{''.join(card(p) for p in fav)}</div></section>
 <section class="wrap sec"><div class="sh"><h2>From the journal</h2><a href="/journal/">Read more</a></div><div class="jlist">{''.join(jcard(o) for o in latest)}</div></section>
 </main>''' + FOOT
@@ -197,16 +211,31 @@ write('/collections/', head("Collections | Mom Tried These", "Short, curated col
 <div class="tiles all">{''.join(f'<a class="tile" href="/collections/{c["slug"]}/"><img src="/img/c/{c["slug"]}.jpg" alt="" width="900" height="900" loading="lazy"><span class="k">{E(c["kicker"])}</span><h3>{E(c["title"])}</h3><p>{E(c["role"])}</p></a>' for c in ORDERED)}</div></main>''' + FOOT)
 for i, c in enumerate(ORDERED):
     it = in_home(c['slug'])
+    hot = sorted([p for p in it if p.get('pop')], key=popn, reverse=True)[:6]; rest = [p for p in it if p not in hot]
+    it = hot + rest
     nxt = [ORDERED[(i + 1) % len(ORDERED)], ORDERED[(i + 2) % len(ORDERED)]]
     ch, cld = crumbs([("Home", "/"), ("Collections", "/collections/"), (c['title'], f"/collections/{c['slug']}/")])
     il = {"@context": "https://schema.org", "@type": "ItemList", "name": c['title'], "numberOfItems": len(it), "itemListElement": [{"@type": "ListItem", "position": k + 1, "name": p['name']} for k, p in enumerate(it)]}
     write(f"/collections/{c['slug']}/", head(f"{c['title']}: {c['kicker']} | Mom Tried These", f"{c['role']} {len(it)} picks, each with the reason it's here.", f"/collections/{c['slug']}/", [cld, il], img=f"/img/c/{c['slug']}-wide.jpg") +
           f'''<main><section class="chero" style="--w:url(/img/c/{c['slug']}-wide.jpg);--q:url(/img/c/{c['slug']}.jpg);background-color:rgb{TINTS.get(c['slug'])}"><div class="wrap"><div class="chbox">{ch}<span class="k">{E(c['kicker'])}</span><h1>{E(c['title'])}</h1><p class="lede">{E(c['role'])}</p></div></div></section>
 <section class="wrap"><div class="how"><p class="k">How we chose</p><p>{E(c['how'])}</p><p class="cnt">{len(it)} picks · {sum(p['bought'] for p in it)} bought by us</p></div>
-<div class="grid g3">{''.join(card(p, k + 1) for k, p in enumerate(it))}</div>
+{f'<h2 class="secth">Most bought right now</h2><p class="sectp">The ones other parents are buying most this month, on Amazon.</p><div class="grid g3">' + ''.join(card(p) for p in hot) + '</div>' if hot else ''}
+<h2 class="secth">{'Our other picks' if hot else 'Our picks'}</h2><div class="grid g3">{''.join(card(p, k + 1) for k, p in enumerate(rest))}</div>
 <div class="more"><p class="k">Next, maybe</p><div class="tiles two">{''.join(f'<a class="tile" href="/collections/{x["slug"]}/"><img src="/img/c/{x["slug"]}.jpg" alt="" width="900" height="900" loading="lazy"><span class="k">{E(x["kicker"])}</span><h3>{E(x["title"])}</h3></a>' for x in nxt)}</div></div></section></main>''' + FOOT)
 
 # ---- Gifts
+def gift_body(g, it):
+    secs = SECTIONS.get(g['slug'])
+    if not secs: return '<div class="grid g3 top">' + ''.join(card(p) for p in sorted(it, key=popn, reverse=True)) + '</div>'
+    nav = '<nav class="gnav" aria-label="Sections">' + ''.join(f'<a href="#{k}">{E(t)}</a>' for k, t, _ in secs) + '</nav>'
+    out = [nav]
+    for k, t, d in secs:
+        ps = sorted([p for p in it if p.get('sec') == k], key=popn, reverse=True)
+        if not ps: continue
+        out.append(f'<section class="gsec" id="{k}"><h2 class="secth">{E(t)}</h2><p class="sectp">{E(d)}</p><div class="grid g3">' + ''.join(card(p) for p in ps) + '</div></section>')
+    left = [p for p in it if p.get('sec') not in [s[0] for s in secs]]
+    if left: out.append('<section class="gsec"><h2 class="secth">More ideas</h2><div class="grid g3">' + ''.join(card(p) for p in left) + '</div></section>')
+    return ''.join(out)
 GL = [g for g in GIFT.values() if in_home(g['slug'])]
 write('/gifts/', head("Gift Guides by Occasion | Mom Tried These", "Gift lists by occasion: Christmas picked early, Diwali far from home and party bags kids keep.", "/gifts/") +
       f'''<main class="wrap"><section class="intro"><h1>Gifts</h1><p class="lede">Lists for a moment, not for every day. Each one is its own short set of products.</p></section>
@@ -216,7 +245,7 @@ for g in GL:
     ch, cld = crumbs([("Home", "/"), ("Gifts", "/gifts/"), (g['title'], f"/gifts/{g['slug']}/")])
     write(f"/gifts/{g['slug']}/", head(f"{g['title']} | Mom Tried These", f"{g['role']} {len(it)} picks.", f"/gifts/{g['slug']}/", [cld], img=f"/img/c/{g['slug']}-wide.jpg") +
           f'''<main><section class="chero" style="--w:url(/img/c/{g['slug']}-wide.jpg);--q:url(/img/c/{g['slug']}.jpg);background-color:rgb{TINTS.get(g['slug'])}"><div class="wrap"><div class="chbox">{ch}<span class="k">{E(g['kicker'])}</span><h1>{E(g['title'])}</h1><p class="lede">{E(g['role'])}</p></div></div></section>
-<section class="wrap"><div class="grid g3 top">{''.join(card(p, k + 1) for k, p in enumerate(it))}</div></section></main>''' + FOOT)
+<section class="wrap">{gift_body(g, it)}</section></main>''' + FOOT)
 
 # ---- Journal
 write('/journal/', head("Journal | Mom Tried These", "Short notes for moms, ideas you can use today, and why we bought the things we bought.", "/journal/") +
@@ -281,7 +310,7 @@ open(f'{OUT}/.htaccess', 'w').write(ht)
 
 # ---- extras
 shutil.copy('static/php/subscribe.php', f'{OUT}/subscribe.php'); shutil.copy('static/php/contact.php', f'{OUT}/contact.php')
-shutil.copy('static/og.jpg', f'{OUT}/og.jpg'); shutil.copy('style3.css', f'{OUT}/s3.css')
+shutil.copy('static/og.jpg', f'{OUT}/og.jpg'); shutil.copy('style3.css', f'{OUT}/s3.css'); shutil.copytree('static/fonts', f'{OUT}/fonts', dirs_exist_ok=True)
 if os.path.isdir('static/pins'): shutil.copytree('static/pins', f'{OUT}/pins', dirs_exist_ok=True)
 open(f'{OUT}/favicon.svg', 'w').write('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#C8643F"/><text x="32" y="43" font-family="Georgia,serif" font-size="30" font-weight="700" fill="#FAF6F0" text-anchor="middle">M</text></svg>')
 open(f'{OUT}/2f9c7b1e8a4d4c6b9e3f5a7d1c0b8e62.txt', 'w').write('2f9c7b1e8a4d4c6b9e3f5a7d1c0b8e62')

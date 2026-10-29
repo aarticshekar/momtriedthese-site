@@ -158,7 +158,7 @@ You can't stop the cancellation. You can make it a slightly annoying day instead
 If you want the tools that make the cooking part faster:
 
 [[crockpot]]
-[[egg-cooker]]"""),
+[[veg-chopper]]"""),
 
 dict(slug="zero-setup-playdate-ideas", kind="idea", date="2026-10-26",
  title="7 Playdate Ideas That Need Zero Setup",
@@ -254,7 +254,7 @@ Crackers, cheese cubes, cucumber rounds, grapes. They assemble. Assembling is ha
 
 ## Friday: breakfast for lunch
 
-Mini pancakes or idli with a dip. Nobody complains on a Friday.
+Mini uttapam or idli with a dip. Nobody complains on a Friday.
 
 ## Two rules that help
 
@@ -279,7 +279,7 @@ Biscuits are easy. But a few days a week, I try one of these instead.
 - Peanut butter banana toast, cut into strips.
 - Makhana roasted in a little ghee with salt. Makes a big bowl in five minutes.
 - Cheese and cucumber "sandwiches", no bread.
-- A boiled egg with salt and pepper.
+- Paneer cubes tossed with a pinch of chaat masala.
 - Fruit with a yogurt dip.
 
 ## Make-ahead, once a week
@@ -290,7 +290,7 @@ Biscuits are easy. But a few days a week, I try one of these instead.
 
 None of these are perfect. That's fine. The goal was "not another biscuit", not "a nutritionist's dream".
 
-[[egg-cooker]]"""),
+[[veg-chopper]]"""),
 
 dict(slug="diwali-snacks-to-make-with-kids", kind="idea", date="2026-10-22",
  title="Easy Diwali Snacks to Make With Kids",
