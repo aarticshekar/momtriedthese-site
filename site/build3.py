@@ -4,6 +4,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dat
 HERE = os.path.dirname(os.path.abspath(__file__)); os.chdir(HERE)
 from catalog import COLLECTIONS, GIFTS, P as CAT
 from journal import J
+from journal2 import J2
+J = J2 + J
 from popular import POP, POPULAR_EXISTING, GIFT_SEC, SECTIONS
 from picks2 import P2
 from picks3 import P3, BOUGHT_EXISTING
@@ -146,7 +148,7 @@ def md(s):
     return ''.join(out)
 def inline(t): return re.sub(r'\[([^\]]+)\]\((/[^)]+)\)', r'<a href="\2">\1</a>', E(t))
 
-KIND = {"note": ("A note", "Notes"), "idea": ("An idea", "Ideas"), "bought": ("Why we bought it", "Why we bought it")}
+KIND = {"list": ("A list", "Lists"), "note": ("A note", "Notes"), "idea": ("An idea", "Ideas"), "bought": ("Why we bought it", "Why we bought it")}
 def jcard(o):
     img = f'/img/c/j-{o["slug"]}.jpg'
     return f'<a class="jc" data-k="{o["kind"]}" href="/journal/{o["slug"]}/"><img src="{img}" alt="" width="600" height="400" loading="lazy"><span class="k">{KIND[o["kind"]][0]}</span><h3>{E(o["title"])}</h3><p>{E(o["desc"])}</p></a>'
@@ -157,7 +159,7 @@ for c in COLL.values():
     it = in_home(c['slug']); collage(c['slug'], it, 900, 900, c['slug']); collage(c['slug'], it, 1600, 700, c['slug'] + '-wide')
 for g in GIFT.values():
     it = in_home(g['slug']); collage(g['slug'], it, 900, 900, g['slug']); collage(g['slug'], it, 1600, 700, g['slug'] + '-wide')
-JTINT = {'note': (243, 232, 222), 'idea': (226, 233, 226), 'bought': (238, 230, 218)}
+JTINT = {'list': (232, 228, 238), 'note': (243, 232, 222), 'idea': (226, 233, 226), 'bought': (238, 230, 218)}
 for o in J:
     TINTS['j-' + o['slug']] = JTINT[o['kind']]
     prods = [SHOWN[x] for x in re.findall(r'\[\[([a-z0-9-]+)\]\]', o['body']) if x in SHOWN]
@@ -195,7 +197,7 @@ TOPPOP = TOPPOP[:6]
 slides = ''.join(f'''<a class="slide{' on' if i == 0 else ''}" href="/gifts/{g['slug']}/" style="--w:url(/img/c/{g['slug']}-wide.jpg);--q:url(/img/c/{g['slug']}.jpg)"><div class="sc"><span class="k">{E(g['kicker'])}</span><h2>{E(g['banner'])}</h2><p>{E(g['role'])}</p><span class="go">Open the list <span aria-hidden="true">→</span></span></div></a>''' for i, g in enumerate(SEASON))
 dots = ''.join(f'<button class="{"on" if i == 0 else ""}" aria-label="Show banner {i + 1}"></button>' for i in range(len(SEASON)))
 START = ['quiet-hour', 'lunchbox', 'travel-day', 'game-night', 'fast-kitchen', 'just-for-you']
-latest = [next(o for o in J if o['kind'] == k) for k in ('note', 'idea', 'bought')]
+latest = [next(o for o in J if o['kind'] == k) for k in ('list', 'note', 'idea')]
 home = head("Mom Tried These: The Short List for Busy Moms", "A short, honest list of things for kids, home and the mom running both. Every pick has a reason, and if we bought it, we say so.", "/",
             [{"@context": "https://schema.org", "@type": "WebSite", "name": "Mom Tried These", "url": SITE}]) + f'''<main>
 <section class="hero"><div class="wrap"><p class="k">Hi. This is the short list.</p><h1>Fewer things, <em>better chosen.</em></h1><p class="lede">I research everything like it's a big decision, even the lunchbox. This is what made the cut, and why. If we bought it, it says so.</p></div></section>
@@ -253,8 +255,8 @@ for g in GL:
 
 # ---- Journal
 write('/journal/', head("Journal | Mom Tried These", "Short notes for moms, ideas you can use today, and why we bought the things we bought.", "/journal/") +
-      f'''<main class="wrap"><section class="intro"><h1>Journal</h1><p class="lede">Three kinds of writing, each with one job. Notes are for you. Ideas are for today. Why we bought it is for when you're deciding.</p>
-<div class="filt" role="group" aria-label="Filter"><button data-k="all" aria-pressed="true">All</button><button data-k="note" aria-pressed="false">Notes</button><button data-k="idea" aria-pressed="false">Ideas</button><button data-k="bought" aria-pressed="false">Why we bought it</button></div></section>
+      f'''<main class="wrap"><section class="intro"><h1>Journal</h1><p class="lede">Four kinds of writing, each with one job. Lists are for choosing. Notes are for you. Ideas are for today. Why we bought it is for when you're deciding.</p>
+<div class="filt" role="group" aria-label="Filter"><button data-k="all" aria-pressed="true">All</button><button data-k="list" aria-pressed="false">Lists</button><button data-k="note" aria-pressed="false">Notes</button><button data-k="idea" aria-pressed="false">Ideas</button><button data-k="bought" aria-pressed="false">Why we bought it</button></div></section>
 <div class="jlist">{''.join(jcard(o) for o in J)}</div></main>''' + FOOT)
 for o in J:
     path = f"/journal/{o['slug']}/"
