@@ -315,7 +315,7 @@ open(f'{OUT}/.htaccess', 'w').write(ht)
 # ---- extras
 shutil.copy('static/php/subscribe.php', f'{OUT}/subscribe.php'); shutil.copy('static/php/contact.php', f'{OUT}/contact.php')
 shutil.copy('static/og.jpg', f'{OUT}/og.jpg'); shutil.copy('style3.css', f'{OUT}/s3.css'); shutil.copytree('static/fonts', f'{OUT}/fonts', dirs_exist_ok=True)
-if os.path.isdir('static/pins'): shutil.copytree('static/pins', f'{OUT}/pins', dirs_exist_ok=True)
+if os.path.isdir('static/pins'): open(f'{OUT}/pinterest-23cb3.html','w').write('<!DOCTYPE html><html><head><meta name="p:domain_verify" content="23cb3eb23d3625355cafdcaa68082097"/></head><body></body></html>'); shutil.copytree('static/pins', f'{OUT}/pins', dirs_exist_ok=True)
 open(f'{OUT}/favicon.svg', 'w').write('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#C8643F"/><text x="32" y="43" font-family="Georgia,serif" font-size="30" font-weight="700" fill="#FAF6F0" text-anchor="middle">M</text></svg>')
 open(f'{OUT}/2f9c7b1e8a4d4c6b9e3f5a7d1c0b8e62.txt', 'w').write('2f9c7b1e8a4d4c6b9e3f5a7d1c0b8e62')
 open(f'{OUT}/robots.txt', 'w').write(f"User-agent: *\nAllow: /\nDisallow: /contact.php\nDisallow: /subscribe.php\nSitemap: {SITE}/sitemap.xml\n")
