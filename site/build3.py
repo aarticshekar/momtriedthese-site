@@ -123,7 +123,7 @@ var f=document.querySelectorAll('.filt button');f.forEach(function(b){{b.onclick
 def card(p, n=None, big=False):
     lab = '<span class="lab own">We bought this</span>' if p['bought'] else '<span class="lab">Shortlisted</span>'
     return f'''<article class="card{' big' if big else ''}" id="{p['slug']}"><div class="ph"><img src="/img/p/{p['slug']}.jpg" alt="{E(p['name'])}" width="640" height="640" loading="lazy"></div>
-<div class="cb">{f'<span class="n">{n:02d}</span>' if n else ''}{lab}<h3>{E(p['name'])}</h3><p>{E(re.sub(r'^We bought (this|these|this one)\. ', '', p['why']))}</p><p class="best">{E(p['best'])}</p>{f'<p class="pop">{E(p["pop"])} bought last month on Amazon</p>' if p.get('pop') and p['pop'] not in ('top',) and p['pop'][:1].isdigit() else ('<p class="pop">A top seller on Amazon right now</p>' if p.get('pop') is not None and p.get('pop') in ('top', '') else '')}
+<div class="cb">{f'<span class="n">{n:02d}</span>' if n else ''}{lab}<h3>{E(p['name'])}</h3><p>{E(re.sub(r'^We bought (this|these|this one)\. ', '', p['why']))}</p><p class="best">{E(p['best'])}</p>
 <a class="buy" rel="sponsored nofollow noopener" target="_blank" href="{link_ae(p)}" data-ae="{link_ae(p)}" data-us="{link_us(p)}">Check the price <span aria-hidden="true">↗</span></a></div></article>'''
 
 def crumbs(items):
@@ -202,7 +202,7 @@ home = head("Mom Tried These: The Short List for Busy Moms", "A short, honest li
 <section class="wrap"><div class="slides">{slides}<div class="dots">{dots}</div></div></section>
 <section class="wrap sec"><div class="sh"><h2>Start with what you need</h2><a href="/collections/">All collections</a></div><div class="tiles">
 {''.join(f'<a class="tile" href="/collections/{s}/"><img src="/img/c/{s}.jpg" alt="" width="900" height="900" loading="lazy"><span class="k">{E(COLL[s]["kicker"])}</span><h3>{E(COLL[s]["title"])}</h3></a>' for s in START)}</div></section>
-<section class="wrap sec"><div class="sh"><h2>Most bought this month</h2><a href="/collections/">See every collection</a></div><p class="subf">What parents are actually buying right now, from the collections below. We checked the numbers so you don't have to.</p><div class="grid g3">{''.join(card(p) for p in TOPPOP)}</div></section>
+<section class="wrap sec"><div class="sh"><h2>Where I'd start</h2><a href="/collections/">See every collection</a></div><p class="subf">The first thing I'd buy from each collection, and the problem it solves.</p><div class="grid g3">{''.join(card(p) for p in TOPPOP)}</div></section>
 <section class="wrap sec"><div class="sh"><h2>Our favourites right now</h2></div><p class="subf">If you only look at six things, look at these.</p><div class="grid g3">{''.join(card(p) for p in fav)}</div></section>
 <section class="wrap sec"><div class="sh"><h2>From the journal</h2><a href="/journal/">Read more</a></div><div class="jlist">{''.join(jcard(o) for o in latest)}</div></section>
 </main>''' + FOOT
@@ -223,7 +223,7 @@ for i, c in enumerate(ORDERED):
     write(f"/collections/{c['slug']}/", head(f"{c['title']}: {c['kicker']} | Mom Tried These", f"{c['role']} {len(it)} picks, each with the reason it's here.", f"/collections/{c['slug']}/", [cld, il], img=f"/img/c/{c['slug']}-wide.jpg") +
           f'''<main><section class="chero" style="--w:url(/img/c/{c['slug']}-wide.jpg);--q:url(/img/c/{c['slug']}.jpg);background-color:rgb{TINTS.get(c['slug'])}"><div class="wrap"><div class="chbox">{ch}<span class="k">{E(c['kicker'])}</span><h1>{E(c['title'])}</h1><p class="lede">{E(c['role'])}</p></div></div></section>
 <section class="wrap"><div class="how"><p class="k">How we chose</p><p>{E(c['how'])}</p><p class="cnt">{len(it)} picks · {sum(p['bought'] for p in it)} bought by us</p></div>
-{f'<h2 class="secth">Most bought right now</h2><p class="sectp">The ones other parents are buying most this month, on Amazon.</p><div class="grid g3">' + ''.join(card(p) for p in hot) + '</div>' if hot else ''}
+{f'<h2 class="secth">Start with these</h2><p class="sectp">If you only get one or two things from this collection, make it these.</p><div class="grid g3">' + ''.join(card(p) for p in hot) + '</div>' if hot else ''}
 <h2 class="secth">{'Our other picks' if hot else 'Our picks'}</h2><div class="grid g3">{''.join(card(p, k + 1) for k, p in enumerate(rest))}</div>
 <div class="more"><p class="k">Next, maybe</p><div class="tiles two">{''.join(f'<a class="tile" href="/collections/{x["slug"]}/"><img src="/img/c/{x["slug"]}.jpg" alt="" width="900" height="900" loading="lazy"><span class="k">{E(x["kicker"])}</span><h3>{E(x["title"])}</h3></a>' for x in nxt)}</div></div></section></main>''' + FOOT)
 
