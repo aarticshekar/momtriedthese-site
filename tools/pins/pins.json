@@ -240,6 +240,50 @@
   "published": "2026-10-29"
  },
  {
+  "id": "shortlist-by-age",
+  "board": "Christmas Gifts for Kids",
+  "link": "/shortlist/",
+  "k": "Free guide",
+  "t": "The Christmas gift shortlist, by age",
+  "s": "Five picks for every age from 6 to 10. Free PDF.",
+  "img": [
+   "lego-shuttle",
+   "snap-circuits",
+   "crunchlabs",
+   "apitor"
+  ],
+  "title": "Free Christmas Gift Guide for Kids 6 to 10, by Age (Printable PDF)",
+  "desc": "Five gifts for every age from 6 to 10 that still get played with in January, and the reason each one is on the list. Eight pages, free to download.",
+  "board_id": "1123507506982411176",
+  "image_url": "https://raw.githubusercontent.com/aarticshekar/momtriedthese-site/factory/site/static/pins/shortlist-by-age.jpg",
+  "url": "https://momtriedthese.com/shortlist/",
+  "description": "Five gifts for every age from 6 to 10 that still get played with in January, and the reason each one is on the list. Eight pages, free to download. A free guide from Mom Tried These.",
+  "wave": 3,
+  "status": "queued"
+ },
+ {
+  "id": "shortlist-january-test",
+  "board": "Christmas Gifts for Kids",
+  "link": "/shortlist/",
+  "k": "Free guide",
+  "t": "Will it still be out of the box in January?",
+  "s": "The one question to ask before you buy. Plus five picks per age.",
+  "img": [
+   "taco-cat",
+   "bananagrams",
+   "flip-7",
+   "herd-mentality"
+  ],
+  "title": "The January Test: How to Pick Christmas Gifts Kids Keep Playing With",
+  "desc": "One question to ask about every gift, and the four-gift rule that keeps the pile small. Free guide with five picks per age, 6 to 10.",
+  "board_id": "1123507506982411176",
+  "image_url": "https://raw.githubusercontent.com/aarticshekar/momtriedthese-site/factory/site/static/pins/shortlist-january-test.jpg",
+  "url": "https://momtriedthese.com/shortlist/",
+  "description": "One question to ask about every gift, and the four-gift rule that keeps the pile small. Free guide with five picks per age, 6 to 10. A free guide from Mom Tried These.",
+  "wave": 3,
+  "status": "queued"
+ },
+ {
   "id": "gifts-10",
   "board": "Christmas Gifts for Kids",
   "board_id": "1123507506982411176",
