@@ -13,3 +13,10 @@ Hostinger deploys `main` only. This branch holds the generators and each week's 
 3. Render to `out/`. Look at every cover jpg before shipping.
 4. On `main`: copy outputs to `social/wN/` (mp4, covers, slides, pins, one `<id>.txt` caption each, and an index.html listing them). Commit and push (auto-deploys). Commit `weeks/wN/` on `factory`.
 5. Do NOT post anywhere. Send Aarti the link momtriedthese.com/social/wN/ for approval.
+
+## Site generator (site/)
+- `cd site && python3 build2.py` writes the full site to `site/out2/`.
+- Posts: `site/data/posts.py`. Products: `picks.json`, `picks2.py`, `picks3.py` (bought items, `BOUGHT_EXISTING`), `lists.json`.
+- Deploy: copy `site/out2/.` over a checkout of `main` (keep `.git`), commit, push. Hostinger auto-deploys in seconds.
+- Weekly social review folders live in `site/static/social/wN/` so every rebuild keeps them.
+- After adding pages, ping IndexNow (key file `2f9c7b1e8a4d4c6b9e3f5a7d1c0b8e62.txt`) if network allows.
