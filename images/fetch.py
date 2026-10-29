@@ -63,6 +63,13 @@ def bing_images(q,dom=None):
         pref=[x for x in out if dom in urllib.parse.urlparse(x[1]).netloc or dom in urllib.parse.urlparse(x[0]).netloc]
         out=pref+[x for x in out if x not in pref]
     return out[:6]
+
+def shopify(url):
+    u=url.split('?')[0].rstrip('/')
+    if '/products/' not in u: raise Exception('not shopify')
+    j=get(u+'.json').json()
+    src=j['product']['images'][0]['src']
+    return get(src).content,src
 def book(spec):
     t,_,a=spec.partition(' by ')
     j=get('https://openlibrary.org/search.json',params={'title':t,'author':a,'limit':5}).json()
@@ -86,6 +93,15 @@ for slug,src in rows:
     if os.path.exists(dst): log.append([slug,'exists','']); continue
     try:
         kind,_,val=src.partition(':')
+        if kind=='urls':
+            err=None; done=False
+            for l in [x.strip() for x in val.split(' || ') if x.strip()]:
+                for fn in (shopify,og):
+                    try: b,u=fn(l); fit(b,dst); log.append([slug,'ok',u+' | '+l]); done=True; break
+                    except Exception as e: err=e
+                if done: break
+            if not done: raise Exception(f'urls failed {err}')
+            time.sleep(0.5); continue
         if kind=='url': b,u=og(val)
         elif kind in ('q','book'):
             if kind=='book':
