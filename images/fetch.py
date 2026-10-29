@@ -50,7 +50,8 @@ def search(q,dom=None):
     return links[:4]
 
 def bing_images(q,dom=None):
-    r=get('https://www.bing.com/images/search',params={'q':q,'form':'HDRSC2','first':'1'})
+    r=get('https://www.bing.com/images/async',params={'q':q,'first':'0','count':'35','mmasync':'1','adlt':'strict'},headers={'Referer':'https://www.bing.com/images/search?q='+urllib.parse.quote(q)})
+    open('images/debug-bing.html','w').write(r.text[:200000]) if not os.path.exists('images/debug-bing.html') else None
     out=[]
     for a in BeautifulSoup(r.text,'html.parser').select('a.iusc'):
         try: m=json.loads(a.get('m','{}'))
