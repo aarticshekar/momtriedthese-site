@@ -64,9 +64,12 @@ def collage(slug, items, w, h, name):
     else:       # square tile: 2x2
         s = int(w * .42); g = int(w * .04); x0 = int((w - (2 * s + g)) / 2)
         pos = [(x0, x0), (x0 + s + g, x0), (x0, x0 + s + g), (x0 + s + g, x0 + s + g)]
-    if n == 1: pos = [(int(w * .72 - s / 2) if w > h else int((w - s) / 2), int((h - s) / 2))]
-    if n == 2: pos = [pos[0], pos[3]]
-    if n == 3: pos = [pos[0], pos[1], (int((pos[0][0] + pos[1][0]) / 2), pos[2][1])]
+    if name.startswith('j-') and w > h:   # journal card: products side by side, large
+        s = int(min(h * .66, (w * .86) / n)); g = int(s * .08); tot = n * s + (n - 1) * g; x0 = int((w - tot) / 2)
+        pos = [(x0 + i * (s + g), int((h - s) / 2)) for i in range(n)]
+    elif n == 1: pos = [(int(w * .72 - s / 2) if w > h else int((w - s) / 2), int((h - s) / 2))]
+    if n == 2 and not name.startswith('j-'): pos = [pos[0], pos[3]]
+    if n == 3 and not name.startswith('j-'): pos = [pos[0], pos[1], (int((pos[0][0] + pos[1][0]) / 2), pos[2][1])]
     xs = [a for a, b in pos[:n]]; ys = [b for a, b in pos[:n]]
     mask = Image.new('L', (s, s), 0); ImageDraw.Draw(mask).rounded_rectangle((0, 0, s - 1, s - 1), radius=int(s * .08), fill=255)
     for im, x, y in zip(ims, xs, ys):

@@ -27,10 +27,6 @@ windowsill-garden	Self-Watering Pots	BOUGHT
 windowsill-garden	Spiral Lucky Bamboo	BOUGHT
 windowsill-garden	Hanging Plant Baskets	BOUGHT
 windowsill-garden	Coco Coir Pellets	BOUGHT
-just-for-you	Murdle	
-just-for-you	The Psychology of Money	
-minecraft-kid	Minecraft Woodsword Chronicles	
-minecraft-kid	Diary of an 8-Bit Warrior	
 minecraft-kid	The Minecraft Ideas Book	
 minecraft-kid	Minecraft Keychain Set	
 christmas	Glitter Dumpling Squishy	BOUGHT

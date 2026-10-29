@@ -50,7 +50,7 @@ h1 em{font-style:italic;font-weight:400;color:var(--terra)}
 .lab.own{background:var(--sageb);color:#3C5A43}
 .buy{margin-top:auto;padding-top:10px;font-size:14px;font-weight:500;color:var(--soft);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px}.buy:hover{color:var(--ink);text-decoration-color:var(--ink)}
 /* collection hero */
-.chero{background-image:var(--w);background-size:cover;background-position:center right;background-color:var(--sand);min-height:420px;display:flex;align-items:center}
+.chero{background-image:var(--w);background-size:auto 100%;background-repeat:no-repeat;background-position:right center;background-color:var(--sand);min-height:420px;display:flex;align-items:center}
 .chbox{background:rgba(251,248,243,.95);padding:clamp(22px,3vw,36px);border-radius:var(--r);max-width:520px;margin:40px 0}
 @media(max-width:700px){.chero{background-image:var(--q);background-size:100% auto;background-position:center top;background-repeat:no-repeat;align-items:flex-end;min-height:auto;padding-top:62vw}.chbox{margin:0 0 20px}}
 .crumbs{font-size:13px;color:var(--mute);margin:0 0 14px}.crumbs a{color:var(--mute)}
@@ -85,3 +85,5 @@ form.subf{margin:0}
 .store{display:inline-flex;border:1px solid var(--line);border-radius:99px;overflow:hidden}.store button{font:500 13px var(--sans);border:0;background:#fff;padding:7px 14px;cursor:pointer;color:var(--soft)}.store button[aria-pressed=true]{background:var(--ink);color:#fff}
 .small{border-top:1px solid var(--line);margin-top:28px;padding-top:20px;font-size:13px;color:var(--mute);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.small p{margin:0}
 @media(max-width:760px){.fgrid{grid-template-columns:1fr 1fr}}
+
+.chero>.wrap{width:100%}

@@ -127,7 +127,7 @@ P = [
  ("smiggle-minecraft-lunch","Smiggle Minecraft Trio Lunchbox","Smiggle Minecraft Lunchbox","lunchbox",
   "Our current lunchbox. The dividers come out, so it works for one big sandwich or lots of little bits.","School lunches, Minecraft fans","q:Smiggle Minecraft lunchbox|smiggle.com"),
  ("smiggle-goal","Smiggle Goal Double Tier Lunchbox","Smiggle Double Tier Lunchbox","lunchbox",
-  "Two tiers keep wet food away from dry. Football design for the sporty one.","Big appetites","q:Smiggle double tier lunchbox|smiggle.com"),
+  "Two tiers keep wet food away from dry. Lots of designs, so there's one for every kid.","Big appetites","q:Smiggle double tier lunchbox|smiggle.com"),
  ("munchkin-bento","Munchkin Lunch Bento Box","Munchkin Bento Box","lunchbox",
   "Small compartments for small eaters. The lid clicks shut properly.","Ages 3 to 7","q:Munchkin lunch bento box|munchkin.com"),
  ("yumlock","YumLock Bento Box (3 Compartments)","YumLock Bento","lunchbox",
