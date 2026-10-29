@@ -98,3 +98,6 @@ form.subf{margin:0}
 @media(max-width:760px){.fgrid{grid-template-columns:1fr 1fr}}
 
 .chero>.wrap{width:100%}
+
+.slcta{display:grid;grid-template-columns:180px minmax(0,1fr);gap:28px;align-items:center;background:var(--sand);border-radius:var(--r);padding:28px;margin:48px 0}.slcta img{border-radius:8px;border:1px solid var(--line);background:#fff}.slcta h2{font-size:clamp(22px,2.6vw,28px)}.slcta p{color:var(--soft);margin:8px 0 0}.slcta .subf{margin-top:16px}.fine{font-size:13px;color:var(--mute)!important}
+@media(max-width:620px){.slcta{grid-template-columns:minmax(0,1fr);padding:22px}.slcta img{max-width:140px}.slcta .subf{flex-wrap:wrap}.slcta .subf input[type=email]{flex:1 1 100%;min-width:0}.slcta .subf button{flex:1 1 100%;padding:14px 24px}}

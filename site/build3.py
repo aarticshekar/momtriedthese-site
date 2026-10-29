@@ -229,6 +229,10 @@ for i, c in enumerate(ORDERED):
 <h2 class="secth">{'Our other picks' if hot else 'Our picks'}</h2><div class="grid g3">{''.join(card(p, k + 1) for k, p in enumerate(rest))}</div>
 <div class="more"><p class="k">Next, maybe</p><div class="tiles two">{''.join(f'<a class="tile" href="/collections/{x["slug"]}/"><img src="/img/c/{x["slug"]}.jpg" alt="" width="900" height="900" loading="lazy"><span class="k">{E(x["kicker"])}</span><h3>{E(x["title"])}</h3></a>' for x in nxt)}</div></div></section></main>''' + FOOT)
 
+
+SLF = '<form method="post" action="/subscribe.php" class="subf"><label class="vh" for="sle">Email</label><input id="sle" name="email" type="email" required placeholder="you@email.com" autocomplete="email"><input type="hidden" name="src" value="/shortlist/"><input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button>Send me the list</button></form>'
+SLCTA = f'<aside class="slcta"><img src="/shortlist/cover.jpg" alt="" width="300" height="424" loading="lazy"><div><p class="k">Free guide</p><h2>The Christmas Gift Shortlist, by Age</h2><p>Five picks for every age from 6 to 10, the reason each one is there, and two rules that stop the January pile. Eight pages. Free.</p>{SLF}<p class="fine">You also get our one-a-month short list. Unsubscribe in one click.</p></div></aside>'
+
 # ---- Gifts
 def gift_body(g, it):
     secs = SECTIONS.get(g['slug'])
@@ -251,7 +255,7 @@ for g in GL:
     ch, cld = crumbs([("Home", "/"), ("Gifts", "/gifts/"), (g['title'], f"/gifts/{g['slug']}/")])
     write(f"/gifts/{g['slug']}/", head(f"{g['title']} | Mom Tried These", f"{g['role']} {len(it)} picks.", f"/gifts/{g['slug']}/", [cld], img=f"/img/c/{g['slug']}-wide.jpg") +
           f'''<main><section class="chero" style="--w:url(/img/c/{g['slug']}-wide.jpg);--q:url(/img/c/{g['slug']}.jpg);background-color:rgb{TINTS.get(g['slug'])}"><div class="wrap"><div class="chbox">{ch}<span class="k">{E(g['kicker'])}</span><h1>{E(g['title'])}</h1><p class="lede">{E(g['role'])}</p></div></div></section>
-<section class="wrap">{gift_body(g, it)}</section></main>''' + FOOT)
+<section class="wrap">{gift_body(g, it)}{SLCTA if g['slug'] == 'christmas' else ''}</section></main>''' + FOOT)
 
 # ---- Journal
 write('/journal/', head("Journal | Mom Tried These", "Short notes for moms, ideas you can use today, and why we bought the things we bought.", "/journal/") +
@@ -265,7 +269,7 @@ for o in J:
     others = [x for x in J if x['kind'] == o['kind'] and x is not o][:2]
     disc = '' if o['kind'] == 'note' or '[[' not in o['body'] else '<p class="disc">Links on this page go to Amazon. If you buy, we may earn a small commission at no cost to you.</p>'
     write(path, head(f"{o['title']} | Mom Tried These", o['desc'], path, [cld, art], img=f"/img/c/j-{o['slug']}.jpg") +
-          f'''<main class="wrap"><article class="post {o['kind']}">{ch}<span class="k">{KIND[o['kind']][0]}</span><h1>{E(o['title'])}</h1><p class="lede">{E(o['desc'])}</p>{disc}<div class="body">{md(o['body'])}</div></article>
+          f'''<main class="wrap"><article class="post {o['kind']}">{ch}<span class="k">{KIND[o['kind']][0]}</span><h1>{E(o['title'])}</h1><p class="lede">{E(o['desc'])}</p>{disc}<div class="body">{md(o['body'])}</div>{SLCTA if o['kind'] == 'list' else ''}</article>
 <section class="sec"><div class="sh"><h2>More {KIND[o['kind']][1].lower()}</h2><a href="/journal/">All writing</a></div><div class="jlist">{''.join(jcard(x) for x in others)}</div></section></main>''' + FOOT)
 
 # ---- Simple pages
@@ -284,12 +288,15 @@ PAGES = {
  "/privacy/": ("Privacy Policy", "Privacy policy for Mom Tried These.", """<h1>Privacy</h1><p>This site does not use advertising cookies or tracking scripts. Your store choice (UAE or US) is saved in your browser only.</p><p><b>Email list.</b> If you join the monthly email, your address is stored securely and used only to send that email. Unsubscribe any time.</p><p><b>Contact form.</b> Messages go to our inbox and are used only to reply.</p><p><b>Amazon links.</b> When you click through to Amazon, Amazon's own privacy policy and cookies apply.</p><p>Questions: <a href="/contact/">contact us</a>.</p>"""),
  "/contact/": ("Contact", "Contact Mom Tried These.", """<h1>Contact</h1><p class="lede">A question about a product, something you think belongs on a list, or a brand enquiry. I read every message.</p>
 <form class="form" method="post" action="/contact.php"><label>Your name<input name="name" required maxlength="100" autocomplete="name"></label><label>Email<input name="email" type="email" required maxlength="200" autocomplete="email"></label><label>What's this about?<select name="topic"><option>A product question</option><option>Suggest a product</option><option>Brand or collaboration</option><option>Something else</option></select></label><label>Message<textarea name="message" required maxlength="4000" rows="6"></textarea></label><input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button class="btn" type="submit">Send</button></form>"""),
+ "/shortlist/": ("The Christmas Gift Shortlist, by Age", "A free 8-page guide: five gifts for every age from 6 to 10 that still get played with in January, and why each one is there.", f'''<p class="k">Free guide, 2026</p><h1>The Christmas Gift Shortlist, by Age</h1><p class="lede">Five gifts for every age from 6 to 10 that still get played with in January. The reason each one is there. And two rules that do most of the work.</p><img src="/shortlist/cover.jpg" alt="Cover of the Christmas Gift Shortlist" width="300" height="424" style="max-width:260px;margin:24px 0;border:1px solid var(--line);border-radius:10px"><p>Eight pages, made to read on your phone in the school pickup line. Pick two per child, and stop.</p>{SLF}<p class="fine">You also get our one-a-month short list. Nothing else. Unsubscribe in one click.</p>'''),
+ "/shortlist/thanks/": ("Your shortlist", "Download the Christmas Gift Shortlist.", '<h1>Here it is</h1><p class="lede">Thank you. Your Christmas Gift Shortlist is ready.</p><p><a class="btn" href="/shortlist/mtt-christmas-shortlist-2026.pdf" download>Download the PDF</a></p><p>Every pick in the guide links to the full list on our site, with prices for the UAE and the US.</p><p><a href="/gifts/christmas/">Or go straight to the Christmas list</a></p>'),
  "/subscribed/": ("You're in", "Thanks for joining.", '<h1>You\'re in</h1><p class="lede">Thank you. The first short list lands at the start of next month.</p><p><a class="btn" href="/collections/">Browse the collections</a></p>'),
  "/contact/thanks/": ("Message sent", "Thanks for your message.", '<h1>Thank you</h1><p class="lede">Your message is on its way.</p><p><a class="btn" href="/">Back home</a></p>'),
 }
 for path, (t, d, b) in PAGES.items():
-    write(path, head(f"{t} | Mom Tried These", d, path, noindex=path in ('/subscribed/', '/contact/thanks/')) + f'<main class="wrap"><div class="prose">{b}</div></main>' + FOOT)
-URLS.remove('/subscribed/'); URLS.remove('/contact/thanks/')
+    write(path, head(f"{t} | Mom Tried These", d, path, noindex=path in ('/subscribed/', '/contact/thanks/', '/shortlist/thanks/')) + f'<main class="wrap"><div class="prose">{b}</div></main>' + FOOT)
+URLS.remove('/subscribed/'); URLS.remove('/contact/thanks/'); URLS.remove('/shortlist/thanks/')
+shutil.copytree('static/shortlist', f'{OUT}/shortlist', dirs_exist_ok=True)
 
 # ---- redirects from old URLs
 RED = {}
@@ -320,7 +327,7 @@ shutil.copy('static/og.jpg', f'{OUT}/og.jpg'); shutil.copy('style3.css', f'{OUT}
 if os.path.isdir('static/pins'): open(f'{OUT}/pinterest-23cb3.html','w').write('<!DOCTYPE html><html><head><meta name="p:domain_verify" content="23cb3eb23d3625355cafdcaa68082097"/></head><body></body></html>'); shutil.copytree('static/pins', f'{OUT}/pins', dirs_exist_ok=True)
 open(f'{OUT}/favicon.svg', 'w').write('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#C8643F"/><text x="32" y="43" font-family="Georgia,serif" font-size="30" font-weight="700" fill="#FAF6F0" text-anchor="middle">M</text></svg>')
 open(f'{OUT}/2f9c7b1e8a4d4c6b9e3f5a7d1c0b8e62.txt', 'w').write('2f9c7b1e8a4d4c6b9e3f5a7d1c0b8e62')
-open(f'{OUT}/robots.txt', 'w').write(f"User-agent: *\nAllow: /\nDisallow: /contact.php\nDisallow: /subscribe.php\nSitemap: {SITE}/sitemap.xml\n")
+open(f'{OUT}/robots.txt', 'w').write(f"User-agent: *\nAllow: /\nDisallow: /contact.php\nDisallow: /subscribe.php\nDisallow: /shortlist/thanks/\nDisallow: /shortlist/mtt-christmas-shortlist-2026.pdf\nSitemap: {SITE}/sitemap.xml\n")
 open(f'{OUT}/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join(f'<url><loc>{SITE}{u}</loc><lastmod>{TODAY}</lastmod></url>' for u in URLS) + '</urlset>')
 items = ''.join(f"<item><title>{E(o['title'])}</title><link>{SITE}/journal/{o['slug']}/</link><guid>{SITE}/journal/{o['slug']}/</guid><description>{E(o['desc'])}</description><pubDate>{email.utils.format_datetime(dt.datetime.fromisoformat(o['date'] + 'T08:00:00+00:00'))}</pubDate></item>" for o in J)
 open(f'{OUT}/feed.xml', 'w').write(f'<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>Mom Tried These</title><link>{SITE}/</link><description>The short list, from one busy mom to another.</description>{items}</channel></rss>')
