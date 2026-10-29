@@ -3,12 +3,12 @@ mini-garden	exists
 rock-painting	exists	
 aqua-puffs	exists	
 hidden-pictures	exists	
-connect-4	ok	https://cdn.cdon.com/media-dynamic/images/product/cloud/store/BoardParlourGames/000/219/235/227/219235227-393682239-11453-org.jpg?cache=134193912180861030&imWidth=600 | https://cdn.cdon.com/media-dynamic/images/product/cloud/store/BoardParlourGames/000/219/235/227/219235227-393682239-11453-org.jpg?cache=134193912180861030&imWidth=600
-tapple	ok	https://www.radartoys.com/cdn/shop/files/d3301461-77ed-4de5-8318-2df08fa36113_235dfccc-a0d8-4da1-a36c-f0c9760169e9.jpg?v=1691434182 | https://www.radartoys.com/cdn/shop/files/d3301461-77ed-4de5-8318-2df08fa36113_235dfccc-a0d8-4da1-a36c-f0c9760169e9.jpg?v=1691434182
+connect-4	exists	
+tapple	exists	
 hedbanz	fail	urls:https://www.spinmaster.com/static/e43198e8a56e419c66efb7df8a108605/mjqwluoo6pi3bm2leydh.jpg :: urls failed 404 Client Error: Not Found for url: https://www.spinmaster.com/static/e43198e8a56e419c66efb7df8a108605/mjqwluoo6pi3bm2leydh.jpg
 herd-mentality	exists	
 snap-circuits	exists	
-magic-chemistry	ok	https://momogadgets.com/cdn/shop/files/national-geographic-magic-chemistry-set-momo-gadgets-3-35606559064357.jpg?v=1719559047&width=1445 | https://momogadgets.com/cdn/shop/files/national-geographic-magic-chemistry-set-momo-gadgets-3-35606559064357.jpg?v=1719559047&width=1445
+magic-chemistry	exists	
 geodes	exists	
 omiebox	exists	
 pinball	exists	
@@ -22,12 +22,12 @@ pip-squeaks	exists
 foot-hammock-bc	fail	urls:https://image.gardenclassics.co.uk/wm/b/Basic-Concepts-Airplane-Foot-Hammock-Memory-Foam-Airplane-Accessories-Plane-Foot-Rest-2-Pack_65e7dcbb-33c5-4fbb-b2a4-35d8b215c532.4a8021a71bc59c14db4e7c33a4143dd9.jpeg :: urls failed 521 Server Error: <none> for url: https://image.gardenclassics.co.uk/wm/
 grab-and-go	fail	urls:https://media.entertainmentearth.com/assets/images/973996ae60c94652af9d92ba507cc6acxl.jpg :: urls failed 403 Client Error: Forbidden for url: https://media.entertainmentearth.com/assets/images/973996ae60c94652af9d92ba507cc6acxl.jpg
 travel-wipes	exists	
-noot-k11	ok	https://ictmirror.com/wp-content/uploads/2024/05/Noot-Products-K11-Foldable-Kids-Headphones.jpg | https://ictmirror.com/wp-content/uploads/2024/05/Noot-Products-K11-Foldable-Kids-Headphones.jpg
+noot-k11	exists	
 ear-muffs	exists	
 veg-chopper	exists	
 can-opener	exists	
 mini-chopper	exists	
-drawer-organizers	ok	https://static0.momsimage.com/wordpress/wp-content/uploads/2025/09/vtopmart-25-piece-clear-plastic-drawer-organizers.jpg?q=70&fit=contain&w=420&dpr=1 | https://static0.momsimage.com/wordpress/wp-content/uploads/2025/09/vtopmart-25-piece-clear-plastic-drawer-organizers.jpg?q=70&fit=contain&w=420&dpr=1
+drawer-organizers	exists	
 candle-warmer	exists	
 cabinet-lights	exists	
 clean-towels	exists	
@@ -40,11 +40,11 @@ minecraft-watch	exists
 squishy-30	exists	
 led-tealights	exists	
 smiggle-spritz	exists	
-rangoli-sand-art	ok	https://shop.kulturekhazana.com/cdn/shop/files/KK2302_268c3950-67ef-4397-9a32-643eead7f104_1024x1024@2x.jpg?v=1694739481 | https://shop.kulturekhazana.com/cdn/shop/files/KK2302_268c3950-67ef-4397-9a32-643eead7f104_1024x1024@2x.jpg?v=1694739481
-rangoli-puzzle	ok	https://n.nordstrommedia.com/it/11619add-c80c-4ae0-8530-0b0af9073ae3.jpeg | https://n.nordstrommedia.com/it/11619add-c80c-4ae0-8530-0b0af9073ae3.jpeg
-moon-lamp	ok	https://playvia.co.uk/cdn/shop/files/hola-paint-your-own-moon-lamp-kit-3d-moon-lamp_1000x.jpg?v=1771311826 | https://playvia.co.uk/cdn/shop/files/hola-paint-your-own-moon-lamp-kit-3d-moon-lamp_1000x.jpg?v=1771311826
-binnys-diwali	ok	https://m1.quebecormedia.com/emp/emp/pornhub_insights_2023_year_in_review_world_top_categories_map7518c094-04eb-42ca-9b48-151bb5284a47_ORIGINAL.jpg?impolicy=crop-resize&x=0&y=0&w=1240&h=1197&width=925 | https://www.lesacdechips.com/2023/12/14/voici-le-mot-le-plus-recherche-sur-pornhub-en-2023-au-canada
-golden-diwali	fail	book:Diwali: A Festival of Lights by Shana Gozansky :: all sources failed no image meta
-lotus-tealight	ok	https://www.tiedribbons.com/cdn/shop/files/4035916e-6d40-4e2d-98ac-728a1f414be51698727012505-TIED-RIBBONS-Pink-7-Pieces-Lotus-Tealight-Candle-Holders-562-3.jpg?v=1698746679&width=720 | https://www.tiedribbons.com/cdn/shop/files/4035916e-6d40-4e2d-98ac-728a1f414be51698727012505-TIED-RIBBONS-Pink-7-Pieces-Lotus-Tealight-Candle-Holders-562-3.jpg?v=1698746679&width=720
-diya-urli-pair	ok	https://www.tiedribbons.com/cdn/shop/files/mynta1.jpg?v=1727935288 | https://www.tiedribbons.com/cdn/shop/files/mynta1.jpg?v=1727935288
-soan-papdi	ok	https://veenas.com/cdn/shop/files/Haldirams_Soan_Papdi_500g.jpg?v=1764590986 | https://veenas.com/cdn/shop/files/Haldirams_Soan_Papdi_500g.jpg?v=1764590986
+rangoli-sand-art	exists	
+rangoli-puzzle	exists	
+moon-lamp	exists	
+binnys-diwali	ok	https://embed.cdn.pais.scholastic.com/v1/channels/sso/products/identifiers/isbn/9781338364484/primary/renditions/700 | https://embed.cdn.pais.scholastic.com/v1/channels/sso/products/identifiers/isbn/9781338364484/primary/renditions/700
+golden-diwali	ok	https://images.penguinrandomhouse.com/cover/9780593703878 | https://images.penguinrandomhouse.com/cover/9780593703878
+lotus-tealight	exists	
+diya-urli-pair	exists	
+soan-papdi	exists	
