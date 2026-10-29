@@ -1,12 +1,23 @@
-:root{--ink:#241F1C;--soft:#5E5550;--mute:#8A807A;--bg:#FBF8F3;--card:#FFFFFF;--line:#ECE5DC;--terra:#C8643F;--sage:#5F7D66;--sageb:#E6EEE6;--sand:#F3ECE2;--r:18px;--serif:'Fraunces',Georgia,serif;--sans:'Inter',system-ui,-apple-system,Segoe UI,sans-serif}
+@font-face{font-family:'Lora';src:url(/fonts/lora-latin-400-normal.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Lora';src:url(/fonts/lora-latin-400-italic.woff2) format('woff2');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Lora';src:url(/fonts/lora-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Lora';src:url(/fonts/lora-latin-600-normal.woff2) format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Inter';src:url(/fonts/inter-latin-400-normal.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Inter';src:url(/fonts/inter-latin-500-normal.woff2) format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Inter';src:url(/fonts/inter-latin-600-normal.woff2) format('woff2');font-weight:600;font-display:swap}
+:root{--ink:#241F1C;--soft:#5E5550;--mute:#8A807A;--bg:#FBF8F3;--card:#FFFFFF;--line:#ECE5DC;--terra:#C8643F;--sage:#5F7D66;--sageb:#E6EEE6;--sand:#F3ECE2;--r:18px;--serif:'Lora',Georgia,serif;--sans:'Inter',system-ui,-apple-system,Segoe UI,sans-serif}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
 img{max-width:100%;height:auto;display:block}a{color:inherit}
 .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
 .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
 .k{font:600 12px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin:0 0 10px;display:block}
-h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:-.01em;line-height:1.15;margin:0}
-h1{font-size:clamp(34px,5vw,56px)}h2{font-size:clamp(24px,3vw,32px)}h3{font-size:20px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;letter-spacing:0;line-height:1.2;margin:0}
+h1{font-size:clamp(32px,4.4vw,50px)}h2{font-size:clamp(24px,3vw,32px)}h3{font-size:20px}
 h1 em{font-style:italic;font-weight:400;color:var(--terra)}
+.secth{font-size:26px;margin:40px 0 6px}.sectp{color:var(--soft);margin:0 0 18px}
+.pop{font-size:13px;font-weight:500;color:var(--terra)!important}
+.gnav{display:flex;flex-wrap:wrap;gap:8px;margin:32px 0 0}.gnav a{font:500 14px var(--sans);text-decoration:none;border:1px solid var(--line);background:#fff;border-radius:99px;padding:8px 14px;color:var(--soft)}.gnav a:hover{color:var(--ink);border-color:var(--ink)}
+.gsec{scroll-margin-top:80px}
 .lede{font-size:clamp(17px,2vw,20px);line-height:1.55;color:var(--soft);max-width:640px;margin:16px 0 0}
 /* header */
 .top{position:sticky;top:0;z-index:20;background:rgba(251,248,243,.92);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
@@ -66,7 +77,7 @@ h1 em{font-style:italic;font-weight:400;color:var(--terra)}
 .filt{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}.filt button{font:500 14px var(--sans);border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:99px;cursor:pointer;color:var(--soft)}.filt button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .post{max-width:700px;margin:0 auto;padding:48px 0 16px}.post h1{font-size:clamp(32px,4.4vw,48px)}
 .body{font-size:18px;line-height:1.75;margin-top:28px}.body p{margin:0 0 20px}.body h2{font-size:24px;margin:36px 0 12px}.body ul{padding-left:22px;margin:0 0 20px}.body li{margin:0 0 8px}
-.post.note .body{font-family:var(--serif);font-size:20px}
+.post.note .body{font-family:var(--serif);font-size:19px;line-height:1.75}
 .inpost{margin:10px 0 28px}.disc{font-size:13px;color:var(--mute);margin:16px 0 0}
 /* prose pages */
 .prose{max-width:700px;margin:0 auto;padding:56px 0 24px;font-size:17px}.prose h2{margin:32px 0 10px;font-size:24px}.prose p{margin:0 0 16px}.prose ul{padding-left:22px}
