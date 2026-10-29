@@ -1,6 +1,6 @@
 <?php
 // The Keepers signup. Saves to a CSV one level ABOVE the web root (not publicly reachable) and notifies the MTT inbox.
-$notify = 'momtriedthese@gmail.com';
+$notify = 'aarticshekar@gmail.com, momtriedthese@gmail.com';
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') { header('Location: /'); exit; }
 if (!empty($_POST['website'])) { header('Location: /subscribed/'); exit; }
 $email = filter_var(trim($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL);
@@ -11,5 +11,5 @@ $file = dirname(__DIR__) . '/mtt-keepers.csv';
 $new = !file_exists($file);
 $fh = @fopen($file, 'a');
 if ($fh) { if (flock($fh, LOCK_EX)) { if ($new) fputcsv($fh, ['date','email','name','source']); fputcsv($fh, [gmdate('c'), $email, $name, $src]); flock($fh, LOCK_UN); } fclose($fh); }
-@mail($notify, 'New Keepers signup: ' . $email, "Email: $email\nName: $name\nFrom page: $src\n", "From: Mom Tried These <hello@momtriedthese.com>\r\nContent-Type: text/plain; charset=UTF-8\r\n");
+@mail($notify, (strpos($src, '/shortlist') === 0 ? 'New shortlist signup: ' : 'New Keepers signup: ') . $email, "Email: $email\nName: $name\nFrom page: $src\n", "From: Mom Tried These <hello@momtriedthese.com>\r\nReply-To: " . $email . "\r\nContent-Type: text/plain; charset=UTF-8\r\n", "-fhello@momtriedthese.com");
 header('Location: ' . (strpos($src, '/shortlist') === 0 ? '/shortlist/thanks/' : '/subscribed/')); exit;
