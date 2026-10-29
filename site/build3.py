@@ -15,6 +15,9 @@ SITE = "https://momtriedthese.com"; OUT = 'out3'
 TODAY = dt.date.today().isoformat()
 US = "momtriedthese-20"; AE = "momtriedthese-21"
 E = html.escape
+import hashlib
+CSSV = hashlib.md5(open('style3.css','rb').read()).hexdigest()[:8]
+SLBAR = '<a class="slbar" href="/shortlist/"><span class="slk">Free guide</span><span class="slt">The Christmas Gift Shortlist, by age. Five picks for every age, 6 to 10.</span><span class="slgo">Get it free &rarr;</span></a>' if TODAY <= '2026-12-25' else ''
 IMGSRC = os.environ.get('MTT_IMAGES', '../images/out')   # folder of <slug>.jpg
 
 # ---------- ASINs from the old data
@@ -106,7 +109,7 @@ def head(title, desc, path, schema=(), img="/og.jpg", noindex=False):
 <meta property="og:type" content="website"><meta property="og:site_name" content="Mom Tried These"><meta property="og:title" content="{E(t)}"><meta property="og:description" content="{E(desc)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}{img}"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Mom Tried These">
 <link rel="preload" href="/fonts/lora-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/s3.css?v={TODAY}">{sch}</head><body>
+<link rel="stylesheet" href="/s3.css?v={CSSV}">{sch}</head><body>
 <header class="top"><div class="wrap bar"><a class="logo" href="/">Mom Tried These</a><nav>{nav}</nav></div></header>'''
 FOOT = f'''<section class="keep"><div class="wrap keepin"><div><p class="k">The monthly short list</p><h2>One email a month. Only the things that earned a spot.</h2><p>No daily deals, no countdown timers. Unsubscribe in one click.</p></div>
 <form method="post" action="/subscribe.php" class="subf"><label class="vh" for="em">Email</label><input id="em" name="email" type="email" required placeholder="you@email.com" autocomplete="email"><input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"><button>Join</button></form></div></section>
@@ -201,6 +204,7 @@ latest = [next(o for o in J if o['kind'] == k) for k in ('list', 'note', 'idea')
 home = head("Mom Tried These: The Short List for Busy Moms", "A short, honest list of things for kids, home and the mom running both. Every pick has a reason, and if we bought it, we say so.", "/",
             [{"@context": "https://schema.org", "@type": "WebSite", "name": "Mom Tried These", "url": SITE}]) + f'''<main>
 <section class="hero"><div class="wrap"><p class="k">Hi. This is the short list.</p><h1>Fewer things, <em>better chosen.</em></h1><p class="lede">I research everything like it's a big decision, even the lunchbox. This is what made the cut, and why. If we bought it, it says so.</p></div></section>
+<div class="wrap">{SLBAR}</div>
 <section class="wrap"><div class="slides">{slides}<div class="dots">{dots}</div></div></section>
 <section class="wrap sec"><div class="sh"><h2>Start with what you need</h2><a href="/collections/">All collections</a></div><div class="tiles">
 {''.join(f'<a class="tile" href="/collections/{s}/"><img src="/img/c/{s}.jpg" alt="" width="900" height="900" loading="lazy"><span class="k">{E(COLL[s]["kicker"])}</span><h3>{E(COLL[s]["title"])}</h3></a>' for s in START)}</div></section>
@@ -224,7 +228,7 @@ for i, c in enumerate(ORDERED):
     il = {"@context": "https://schema.org", "@type": "ItemList", "name": c['title'], "numberOfItems": len(it), "itemListElement": [{"@type": "ListItem", "position": k + 1, "name": p['name']} for k, p in enumerate(it)]}
     write(f"/collections/{c['slug']}/", head(f"{c['title']}: {c['kicker']} | Mom Tried These", f"{c['role']} {len(it)} picks, each with the reason it's here.", f"/collections/{c['slug']}/", [cld, il], img=f"/img/c/{c['slug']}-wide.jpg") +
           f'''<main><section class="chero" style="--w:url(/img/c/{c['slug']}-wide.jpg);--q:url(/img/c/{c['slug']}.jpg);background-color:rgb{TINTS.get(c['slug'])}"><div class="wrap"><div class="chbox">{ch}<span class="k">{E(c['kicker'])}</span><h1>{E(c['title'])}</h1><p class="lede">{E(c['role'])}</p></div></div></section>
-<section class="wrap"><div class="how"><p class="k">How we chose</p><p>{E(c['how'])}</p><p class="cnt">{len(it)} picks · {sum(p['bought'] for p in it)} bought by us</p></div>
+<section class="wrap">{SLBAR}<div class="how"><p class="k">How we chose</p><p>{E(c['how'])}</p><p class="cnt">{len(it)} picks{f' · {nb} bought by us' if (nb := sum(p['bought'] for p in it)) else ''}</p></div>
 {f'<h2 class="secth">Start with these</h2><p class="sectp">If you only get one or two things from this collection, make it these.</p><div class="grid g3">' + ''.join(card(p) for p in hot) + '</div>' if hot else ''}
 <h2 class="secth">{'Our other picks' if hot else 'Our picks'}</h2><div class="grid g3">{''.join(card(p, k + 1) for k, p in enumerate(rest))}</div>
 <div class="more"><p class="k">Next, maybe</p><div class="tiles two">{''.join(f'<a class="tile" href="/collections/{x["slug"]}/"><img src="/img/c/{x["slug"]}.jpg" alt="" width="900" height="900" loading="lazy"><span class="k">{E(x["kicker"])}</span><h3>{E(x["title"])}</h3></a>' for x in nxt)}</div></div></section></main>''' + FOOT)
@@ -255,7 +259,7 @@ for g in GL:
     ch, cld = crumbs([("Home", "/"), ("Gifts", "/gifts/"), (g['title'], f"/gifts/{g['slug']}/")])
     write(f"/gifts/{g['slug']}/", head(f"{g['title']} | Mom Tried These", f"{g['role']} {len(it)} picks.", f"/gifts/{g['slug']}/", [cld], img=f"/img/c/{g['slug']}-wide.jpg") +
           f'''<main><section class="chero" style="--w:url(/img/c/{g['slug']}-wide.jpg);--q:url(/img/c/{g['slug']}.jpg);background-color:rgb{TINTS.get(g['slug'])}"><div class="wrap"><div class="chbox">{ch}<span class="k">{E(g['kicker'])}</span><h1>{E(g['title'])}</h1><p class="lede">{E(g['role'])}</p></div></div></section>
-<section class="wrap">{gift_body(g, it)}{SLCTA if g['slug'] == 'christmas' else ''}</section></main>''' + FOOT)
+<section class="wrap">{SLBAR}{gift_body(g, it)}{SLCTA if g['slug'] == 'christmas' else ''}</section></main>''' + FOOT)
 
 # ---- Journal
 write('/journal/', head("Journal | Mom Tried These", "Short notes for moms, ideas you can use today, and why we bought the things we bought.", "/journal/") +
@@ -269,7 +273,7 @@ for o in J:
     others = [x for x in J if x['kind'] == o['kind'] and x is not o][:2]
     disc = '' if o['kind'] == 'note' or '[[' not in o['body'] else '<p class="disc">Links on this page go to Amazon. If you buy, we may earn a small commission at no cost to you.</p>'
     write(path, head(f"{o['title']} | Mom Tried These", o['desc'], path, [cld, art], img=f"/img/c/j-{o['slug']}.jpg") +
-          f'''<main class="wrap"><article class="post {o['kind']}">{ch}<span class="k">{KIND[o['kind']][0]}</span><h1>{E(o['title'])}</h1><p class="lede">{E(o['desc'])}</p>{disc}<div class="body">{md(o['body'])}</div>{SLCTA if o['kind'] == 'list' else ''}</article>
+          f'''<main class="wrap"><article class="post {o['kind']}">{ch}<span class="k">{KIND[o['kind']][0]}</span><h1>{E(o['title'])}</h1><p class="lede">{E(o['desc'])}</p>{SLBAR if o['kind'] == 'list' else ''}{disc}<div class="body">{md(o['body'])}</div>{SLCTA if o['kind'] == 'list' else ''}</article>
 <section class="sec"><div class="sh"><h2>More {KIND[o['kind']][1].lower()}</h2><a href="/journal/">All writing</a></div><div class="jlist">{''.join(jcard(x) for x in others)}</div></section></main>''' + FOOT)
 
 # ---- Simple pages

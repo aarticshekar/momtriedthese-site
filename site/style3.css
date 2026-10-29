@@ -101,3 +101,20 @@ form.subf{margin:0}
 
 .slcta{display:grid;grid-template-columns:180px minmax(0,1fr);gap:28px;align-items:center;background:var(--sand);border-radius:var(--r);padding:28px;margin:48px 0}.slcta img{border-radius:8px;border:1px solid var(--line);background:#fff}.slcta h2{font-size:clamp(22px,2.6vw,28px)}.slcta p{color:var(--soft);margin:8px 0 0}.slcta .subf{margin-top:16px}.fine{font-size:13px;color:var(--mute)!important}
 @media(max-width:620px){.slcta{grid-template-columns:minmax(0,1fr);padding:22px}.slcta img{max-width:140px}.slcta .subf{flex-wrap:wrap}.slcta .subf input[type=email]{flex:1 1 100%;min-width:0}.slcta .subf button{flex:1 1 100%;padding:14px 24px}}
+
+/* shortlist strip */
+.slbar{display:flex;align-items:center;gap:14px;text-decoration:none;background:var(--ink);color:#fff;border-radius:14px;padding:14px 18px;margin:20px 0 0}
+.slbar .slk{font:600 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;background:var(--terra);padding:6px 9px;border-radius:99px;flex:none}
+.slbar .slt{flex:1;font-size:15px;line-height:1.4}.slbar .slgo{font-weight:600;font-size:14px;white-space:nowrap}
+.slbar:hover .slgo{text-decoration:underline}
+/* phone pass */
+@media(max-width:620px){
+.slbar{flex-wrap:wrap;gap:8px 10px;padding:14px 16px}.slbar .slt{flex:1 1 100%;order:2;font-size:15px}.slbar .slgo{order:3}
+.tiles{gap:30px 14px}.tile .k{font-size:10px;letter-spacing:.08em;line-height:1.45;margin:12px 0 6px}.tile h3{font-size:17px;line-height:1.3}
+.g3,.g2{grid-template-columns:1fr 1fr;gap:12px}
+.ph{aspect-ratio:1}.cb{padding:12px 12px 14px;gap:6px}.cb h3{font-size:15px;line-height:1.3}.cb p{font-size:13px;line-height:1.5}.cb .best{font-size:12px}
+.lab{font-size:9.5px;padding:5px 7px}.n{top:12px;right:12px;font-size:11px}.buy{font-size:13px}
+.secth{font-size:22px;margin:36px 0 8px;line-height:1.25}.sectp{font-size:15px;line-height:1.5;margin:0 0 16px}
+.body h2{font-size:22px;margin:32px 0 10px;line-height:1.3}
+.how{padding-top:20px}
+}
