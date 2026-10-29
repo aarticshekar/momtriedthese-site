@@ -44,7 +44,7 @@ POP = [
  ("candle-warmer","Candle Warmer Lamp with Timer","B0DZFGTCLR","just-for-you","Melts the candle from the top, so the scent fills the room with no flame.","Evenings","60K+",""),
  ("clean-towels","Clean Skin Club Clean Towels XL","B07PBXXNCY","just-for-you","Disposable face towels. A small luxury that makes the routine feel like a spa.","Skincare routine","100K+",""),
  # Minecraft Kid
- ("lego-chicken-jockey","LEGO Minecraft Chicken Jockey 21582","B0G2T5CVZ5","minecraft-kid","The chicken jockey from the game, as a buildable figure. Very popular this season.","Ages 8 and up","10K+",""),
+ ("lego-chicken-jockey","LEGO Minecraft Chicken Jockey 21582","B0G2T5CVZ5","minecraft-kid","The chicken jockey from the game, as a buildable figure. Small enough to finish in one afternoon.","Ages 8 and up","10K+",""),
  ("lego-zombie-dungeon","LEGO Minecraft Zombie Dungeon 21587","B0FMS86M4H","minecraft-kid","A dungeon build with zombies and traps. Lots of play after the build.","Ages 8 and up","9K+",""),
  ("lego-skeleton","LEGO Minecraft The Skeleton 21594","B0G2SYW4FW","minecraft-kid","A big buildable skeleton for older fans who like to display what they build.","Ages 9 and up","5K+",""),
  ("minecraft-watch","Minecraft Kids Smart Watch","B08YFKKRY3","minecraft-kid","Camera, games and Minecraft clock faces. No internet.","Ages 5 to 10","2K+",""),

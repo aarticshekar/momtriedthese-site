@@ -121,7 +121,7 @@ P = [
  ("lego-shuttle","LEGO Creator 3-in-1 Space Shuttle","LEGO Creator 3-in-1 Space Shuttle","little-makers",
   "Three builds from one box: a shuttle, an astronaut or a spaceship. Rebuilds keep it alive past day one.","Ages 6 and up","q:LEGO 31134 Space Shuttle brickset|brickset.com"),
  ("lego-spider","LEGO Creator 3-in-1 Wild Animals Spider","LEGO Creator 3-in-1 Spider","little-makers",
-  "A big spider that rebuilds into a scorpion or a snake. Popular with kids who love creepy things.","Ages 7 and up","q:LEGO Creator 3 in 1 Wild Animals Surprising Spider brickset|brickset.com"),
+  "A big spider that rebuilds into a scorpion or a snake. For the kid who loves creepy things.","Ages 7 and up","q:LEGO Creator 3 in 1 Wild Animals Surprising Spider brickset|brickset.com"),
 
  # ---------------- Lunchbox Edit
  ("smiggle-minecraft-lunch","Smiggle Minecraft Trio Lunchbox","Smiggle Minecraft Lunchbox","lunchbox",
