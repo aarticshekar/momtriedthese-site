@@ -6,6 +6,8 @@ from catalog import COLLECTIONS, GIFTS, P as CAT
 from journal import J
 from journal2 import J2
 J = J2 + J
+LISTS = [o for o in J if o['kind'] == 'list']
+JV = [o for o in J if o['kind'] != 'list']   # the journal: voice first
 from popular import POP, POPULAR_EXISTING, GIFT_SEC, SECTIONS
 from picks2 import P2
 from picks3 import P3, BOUGHT_EXISTING
@@ -85,7 +87,7 @@ def collage(slug, items, w, h, name):
         s = int(min(h * .66, (w * .86) / n)); g = int(s * .08); tot = n * s + (n - 1) * g; x0 = int((w - tot) / 2)
         pos = [(x0 + i * (s + g), int((h - s) / 2)) for i in range(n)]
     elif n == 1: pos = [(int(w * .72 - s / 2) if w > h else int((w - s) / 2), int((h - s) / 2))]
-    if n == 2 and not name.startswith('j-'): pos = [pos[0], pos[3]]
+    if n == 2 and not name.startswith('j-'): yc = pos[0][1] + int((pos[2][1] - pos[0][1]) / 2); pos = [(pos[0][0], yc), (pos[1][0], yc)]
     if n == 3 and not name.startswith('j-'): pos = [pos[0], pos[1], (int((pos[0][0] + pos[1][0]) / 2), pos[2][1])]
     xs = [a for a, b in pos[:n]]; ys = [b for a, b in pos[:n]]
     mask = Image.new('L', (s, s), 0); ImageDraw.Draw(mask).rounded_rectangle((0, 0, s - 1, s - 1), radius=int(s * .08), fill=255)
@@ -136,13 +138,15 @@ def crumbs(items):
     return '<nav class="crumbs" aria-label="Breadcrumb">' + ' / '.join(f'<a href="{u}">{E(n)}</a>' for n, u in items[:-1]) + f' / <span>{E(items[-1][0])}</span></nav>', ld
 
 # ---------- markup for journal bodies
-def md(s):
+def mini(p):
+    return f'<a class="mini" rel="sponsored nofollow noopener" target="_blank" href="{link_ae(p)}" data-ae="{link_ae(p)}" data-us="{link_us(p)}"><img src="/img/p/{p["slug"]}.jpg" alt="" width="72" height="72" loading="lazy"><span><b>{E(p["name"])}</b><em>See it on Amazon</em></span></a>'
+def md(s, compact=False):
     out, ul = [], False
     for block in s.strip().split('\n\n'):
         lines = block.split('\n')
         if all(l.startswith('[[') for l in lines):
             cards = [SHOWN[l[2:-2]] for l in lines if l[2:-2] in SHOWN]
-            if cards: out.append('<div class="grid g2 inpost">' + ''.join(card(c) for c in cards) + '</div>')
+            if cards: out.append(('<div class="minis">' + ''.join(mini(c) for c in cards) + '</div>') if compact else ('<div class="grid g2 inpost">' + ''.join(card(c) for c in cards) + '</div>'))
             continue
         if lines[0].startswith('## '): out.append(f'<h2>{E(lines[0][3:])}</h2>'); lines = lines[1:]
         if not lines: continue
@@ -152,9 +156,12 @@ def md(s):
 def inline(t): return re.sub(r'\[([^\]]+)\]\((/[^)]+)\)', r'<a href="\2">\1</a>', E(t))
 
 KIND = {"list": ("A list", "Lists"), "note": ("A note", "Notes"), "idea": ("An idea", "Ideas"), "bought": ("Why we bought it", "Why we bought it")}
+def first_line(o):
+    for para in o['body'].strip().split('\n\n'):
+        if not para.startswith(('#', '[[', '- ')): return re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', para.split('\n')[0])
+    return o['desc']
 def jcard(o):
-    img = f'/img/c/j-{o["slug"]}.jpg'
-    return f'<a class="jc" data-k="{o["kind"]}" href="/journal/{o["slug"]}/"><img src="{img}" alt="" width="600" height="400" loading="lazy"><span class="k">{KIND[o["kind"]][0]}</span><h3>{E(o["title"])}</h3><p>{E(o["desc"])}</p></a>'
+    return f'<a class="jc txt" data-k="{o["kind"]}" href="/journal/{o["slug"]}/"><span class="k">{KIND[o["kind"]][0]}</span><blockquote>{E(first_line(o))}</blockquote><h3>{E(o["title"])}</h3><span class="rd">Read</span></a>'
 
 # ======================================================= pages
 # collages
@@ -200,7 +207,7 @@ TOPPOP = TOPPOP[:6]
 slides = ''.join(f'''<a class="slide{' on' if i == 0 else ''}" href="/gifts/{g['slug']}/" style="--w:url(/img/c/{g['slug']}-wide.jpg);--q:url(/img/c/{g['slug']}.jpg)"><div class="sc"><span class="k">{E(g['kicker'])}</span><h2>{E(g['banner'])}</h2><p>{E(g['role'])}</p><span class="go">Open the list <span aria-hidden="true">→</span></span></div></a>''' for i, g in enumerate(SEASON))
 dots = ''.join(f'<button class="{"on" if i == 0 else ""}" aria-label="Show banner {i + 1}"></button>' for i in range(len(SEASON)))
 START = ['quiet-hour', 'lunchbox', 'travel-day', 'game-night', 'fast-kitchen', 'just-for-you']
-latest = [next(o for o in J if o['kind'] == k) for k in ('list', 'note', 'idea')]
+latest = [o for o in JV if o['kind'] == 'note'][:2] + [next(o for o in JV if o['kind'] == 'idea')]
 home = head("Mom Tried These: The Short List for Busy Moms", "A short, honest list of things for kids, home and the mom running both. Every pick has a reason, and if we bought it, we say so.", "/",
             [{"@context": "https://schema.org", "@type": "WebSite", "name": "Mom Tried These", "url": SITE}]) + f'''<main>
 <section class="hero"><div class="wrap"><p class="k">Hi. This is the short list.</p><h1>Fewer things, <em>better chosen.</em></h1><p class="lede">I research everything like it's a big decision, even the lunchbox. This is what made the cut, and why. If we bought it, it says so.</p></div></section>
@@ -252,7 +259,8 @@ def gift_body(g, it):
     return ''.join(out)
 GL = [g for g in GIFT.values() if in_home(g['slug'])]
 write('/gifts/', head("Gift Guides by Occasion | Mom Tried These", "Gift lists by occasion: Christmas picked early, Diwali far from home and party bags kids keep.", "/gifts/") +
-      f'''<main class="wrap"><section class="intro"><h1>Gifts</h1><p class="lede">Lists for a moment, not for every day. Each one is its own short set of products.</p></section>
+      f'''<main class="wrap"><section class="intro"><h1>Gifts</h1><p class="lede">Lists for a moment, not for every day. Each one is its own short set of products.</p>
+<div class="ages"><p class="k">Gifts by age</p><div class="gnav">{''.join(f'<a href="/journal/{o["slug"]}/">{E(o["slug"].split("-")[2])} year olds</a>' for o in sorted(LISTS, key=lambda o: int(o['slug'].split('-')[2])))}</div></div>{SLBAR}</section>
 {''.join(f'<a class="gban" href="/gifts/{g["slug"]}/" style="--w:url(/img/c/{g["slug"]}-wide.jpg);--q:url(/img/c/{g["slug"]}.jpg)"><div class="sc"><span class="k">{E(g["kicker"])}</span><h2>{E(g["title"])}</h2><p>{E(g["role"])}</p><span class="go">Open the list →</span></div></a>' for g in GL)}</main>''' + FOOT)
 for g in GL:
     it = in_home(g['slug'])
@@ -263,17 +271,17 @@ for g in GL:
 
 # ---- Journal
 write('/journal/', head("Journal | Mom Tried These", "Short notes for moms, ideas you can use today, and why we bought the things we bought.", "/journal/") +
-      f'''<main class="wrap"><section class="intro"><h1>Journal</h1><p class="lede">Four kinds of writing, each with one job. Lists are for choosing. Notes are for you. Ideas are for today. Why we bought it is for when you're deciding.</p>
-<div class="filt" role="group" aria-label="Filter"><button data-k="all" aria-pressed="true">All</button><button data-k="list" aria-pressed="false">Lists</button><button data-k="note" aria-pressed="false">Notes</button><button data-k="idea" aria-pressed="false">Ideas</button><button data-k="bought" aria-pressed="false">Why we bought it</button></div></section>
-<div class="jlist">{''.join(jcard(o) for o in J)}</div></main>''' + FOOT)
+      f'''<main class="wrap"><section class="intro"><h1>Journal</h1><p class="lede">Short writing from one mom to another. Notes are for you. Ideas are for today. Why we bought it is for when you're deciding. The gift lists live under Gifts.</p>
+<div class="filt" role="group" aria-label="Filter"><button data-k="all" aria-pressed="true">All</button><button data-k="note" aria-pressed="false">Notes</button><button data-k="idea" aria-pressed="false">Ideas</button><button data-k="bought" aria-pressed="false">Why we bought it</button></div></section>
+<div class="jlist">{''.join(jcard(o) for o in JV)}</div></main>''' + FOOT)
 for o in J:
     path = f"/journal/{o['slug']}/"
-    ch, cld = crumbs([("Home", "/"), ("Journal", "/journal/"), (o['title'], path)])
+    ch, cld = crumbs([("Home", "/"), ("Gifts", "/gifts/"), (o['title'], path)] if o['kind'] == 'list' else [("Home", "/"), ("Journal", "/journal/"), (o['title'], path)])
     art = {"@context": "https://schema.org", "@type": "BlogPosting", "headline": o['title'], "description": o['desc'], "datePublished": o['date'], "dateModified": TODAY, "author": {"@type": "Organization", "name": "Mom Tried These"}, "image": SITE + f"/img/c/j-{o['slug']}.jpg", "mainEntityOfPage": SITE + path}
-    others = [x for x in J if x['kind'] == o['kind'] and x is not o][:2]
+    others = [x for x in (LISTS if o['kind'] == 'list' else JV) if x['kind'] == o['kind'] and x is not o][:2]
     disc = '' if o['kind'] == 'note' or '[[' not in o['body'] else '<p class="disc">Links on this page go to Amazon. If you buy, we may earn a small commission at no cost to you.</p>'
     write(path, head(f"{o['title']} | Mom Tried These", o['desc'], path, [cld, art], img=f"/img/c/j-{o['slug']}.jpg") +
-          f'''<main class="wrap"><article class="post {o['kind']}">{ch}<span class="k">{KIND[o['kind']][0]}</span><h1>{E(o['title'])}</h1><p class="lede">{E(o['desc'])}</p>{SLBAR if o['kind'] == 'list' else ''}{disc}<div class="body">{md(o['body'])}</div>{SLCTA if o['kind'] == 'list' else ''}</article>
+          f'''<main class="wrap"><article class="post {o['kind']}">{ch}<span class="k">{KIND[o['kind']][0]}</span><h1>{E(o['title'])}</h1><p class="lede">{E(o['desc'])}</p>{SLBAR if o['kind'] == 'list' else ''}{disc}<div class="body">{md(o['body'], o['kind'] in ('note', 'idea'))}</div>{SLCTA if o['kind'] == 'list' else ''}</article>
 <section class="sec"><div class="sh"><h2>More {KIND[o['kind']][1].lower()}</h2><a href="/journal/">All writing</a></div><div class="jlist">{''.join(jcard(x) for x in others)}</div></section></main>''' + FOOT)
 
 # ---- Simple pages
