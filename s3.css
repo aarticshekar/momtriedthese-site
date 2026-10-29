@@ -40,7 +40,7 @@ h1 em{font-style:italic;font-weight:400;color:var(--terra)}
 .gban:hover .go{text-decoration:underline}
 @media(max-width:700px){.gban{aspect-ratio:auto;height:600px;align-items:flex-end;background-image:var(--q);background-position:center top;background-size:100% auto;background-repeat:no-repeat}}
 /* sections */
-.sec{padding:56px 0 8px}.sh{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:0 0 8px}.sh a{font-weight:500;font-size:15px;color:var(--soft);text-decoration-color:var(--line);text-underline-offset:4px}
+.sec{padding-top:56px;padding-bottom:8px}.sh{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:0 0 8px}.sh a{font-weight:500;font-size:15px;color:var(--soft);text-decoration-color:var(--line);text-underline-offset:4px}
 .sub{color:var(--soft);margin:0 0 22px}
 .intro{padding:56px 0 28px}
 /* tiles */
@@ -118,3 +118,14 @@ form.subf{margin:0}
 .body h2{font-size:22px;margin:32px 0 10px;line-height:1.3}
 .how{padding-top:20px}
 }
+
+/* journal: words first */
+.jc.txt{background:var(--sand);border-radius:var(--r);padding:26px 24px 22px;display:flex;flex-direction:column;gap:12px;min-height:240px;color:var(--ink)}
+.jc.txt[data-k="idea"]{background:var(--sageb)}.jc.txt[data-k="bought"]{background:#fff;border:1px solid var(--line)}
+.jc.txt .k{margin:0}.jc.txt blockquote{margin:0;font:italic 400 20px/1.45 var(--serif);color:var(--ink);flex:1}
+.jc.txt h3{font:600 15px/1.35 var(--sans);color:var(--soft)}.jc.txt .rd{font-size:14px;font-weight:600;color:var(--terra)}
+.minis{display:grid;gap:10px;margin:0 0 24px}
+.mini{display:flex;gap:14px;align-items:center;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px 10px 10px}
+.mini img{width:60px;height:60px;object-fit:contain;flex:none}.mini span{display:flex;flex-direction:column;line-height:1.35}.mini b{font:600 15px var(--sans)}.mini em{font-style:normal;font-size:13px;color:var(--mute)}
+.ages{margin-top:20px}.ages .gnav{margin-top:8px}
+@media(max-width:620px){.jc.txt{min-height:0}.jc.txt blockquote{font-size:18px}}
