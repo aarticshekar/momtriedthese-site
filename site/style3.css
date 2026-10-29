@@ -52,7 +52,7 @@ h1 em{font-style:italic;font-weight:400;color:var(--terra)}
 /* collection hero */
 .chero{background-image:var(--w);background-size:auto 100%;background-repeat:no-repeat;background-position:right center;background-color:var(--sand);min-height:420px;display:flex;align-items:center}
 .chbox{background:rgba(251,248,243,.95);padding:clamp(22px,3vw,36px);border-radius:var(--r);max-width:520px;margin:40px 0}
-@media(max-width:700px){.chero{background-image:var(--q);background-size:100% auto;background-position:center top;background-repeat:no-repeat;align-items:flex-end;min-height:auto;padding-top:62vw}.chbox{margin:0 0 20px}}
+@media(max-width:700px){.chero{background-image:var(--q);background-size:100% auto;background-position:center top;background-repeat:no-repeat;align-items:flex-end;min-height:auto;padding-top:96vw}.chbox{margin:0 0 20px}}
 .crumbs{font-size:13px;color:var(--mute);margin:0 0 14px}.crumbs a{color:var(--mute)}
 .how{display:grid;grid-template-columns:200px 1fr auto;gap:24px;align-items:baseline;padding:28px 0;margin:0 0 28px;border-bottom:1px solid var(--line)}
 .how p{margin:0}.how .cnt{color:var(--mute);font-size:14px;white-space:nowrap}

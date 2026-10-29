@@ -154,7 +154,9 @@ for o in J:
         im = Image.new('RGB', (1200, 800), JTINT['note']); d = ImageDraw.Draw(im)
         try: fnt = ImageFont.truetype('static/fraunces.ttf', 64)
         except Exception: fnt = ImageFont.load_default()
-        words, lines, cur = o['title'].split(), [], ''
+        pull = re.sub(r'\s+', ' ', [l for l in o['body'].split('\n') if l.strip() and not l.startswith(('#', '-', '['))][0]).strip()
+        if len(pull) > 90: pull = pull[:pull.rfind(' ', 0, 88)] + '...'
+        words, lines, cur = ('\u201c' + pull + '\u201d').split(), [], ''
         for w_ in words:
             if d.textlength(cur + ' ' + w_, font=fnt) > 920: lines.append(cur); cur = w_
             else: cur = (cur + ' ' + w_).strip()
@@ -163,7 +165,7 @@ for o in J:
         d.rectangle((140, y + 24, 220, y + 30), fill=(210, 100, 63))
         im.thumbnail((600, 400)); im.save(f'{OUT}/img/c/j-{o["slug"]}.jpg', quality=84)
     else:
-        if not prods: prods = [p for p in SHOWN.values() if p['home'] in ('lunchbox', 'fast-kitchen')][:3]
+        if not prods: prods = [p for p in SHOWN.values() if p['home'] == ('game-night' if 'playdate' in o['slug'] else 'fast-kitchen')][:3]
         collage('j-' + o['slug'], prods, 1200, 800, 'j-' + o['slug'])
         Image.open(f'{OUT}/img/c/j-{o["slug"]}.jpg').resize((600, 400)).save(f'{OUT}/img/c/j-{o["slug"]}.jpg', quality=84)
 
@@ -199,7 +201,7 @@ for i, c in enumerate(ORDERED):
     ch, cld = crumbs([("Home", "/"), ("Collections", "/collections/"), (c['title'], f"/collections/{c['slug']}/")])
     il = {"@context": "https://schema.org", "@type": "ItemList", "name": c['title'], "numberOfItems": len(it), "itemListElement": [{"@type": "ListItem", "position": k + 1, "name": p['name']} for k, p in enumerate(it)]}
     write(f"/collections/{c['slug']}/", head(f"{c['title']}: {c['kicker']} | Mom Tried These", f"{c['role']} {len(it)} picks, each with the reason it's here.", f"/collections/{c['slug']}/", [cld, il], img=f"/img/c/{c['slug']}-wide.jpg") +
-          f'''<main><section class="chero" style="--w:url(/img/c/{c['slug']}-wide.jpg);--q:url(/img/c/{c['slug']}.jpg)"><div class="wrap"><div class="chbox">{ch}<span class="k">{E(c['kicker'])}</span><h1>{E(c['title'])}</h1><p class="lede">{E(c['role'])}</p></div></div></section>
+          f'''<main><section class="chero" style="--w:url(/img/c/{c['slug']}-wide.jpg);--q:url(/img/c/{c['slug']}.jpg);background-color:rgb{TINTS.get(c['slug'])}"><div class="wrap"><div class="chbox">{ch}<span class="k">{E(c['kicker'])}</span><h1>{E(c['title'])}</h1><p class="lede">{E(c['role'])}</p></div></div></section>
 <section class="wrap"><div class="how"><p class="k">How we chose</p><p>{E(c['how'])}</p><p class="cnt">{len(it)} picks · {sum(p['bought'] for p in it)} bought by us</p></div>
 <div class="grid g3">{''.join(card(p, k + 1) for k, p in enumerate(it))}</div>
 <div class="more"><p class="k">Next, maybe</p><div class="tiles two">{''.join(f'<a class="tile" href="/collections/{x["slug"]}/"><img src="/img/c/{x["slug"]}.jpg" alt="" width="900" height="900" loading="lazy"><span class="k">{E(x["kicker"])}</span><h3>{E(x["title"])}</h3></a>' for x in nxt)}</div></div></section></main>''' + FOOT)
@@ -213,7 +215,7 @@ for g in GL:
     it = in_home(g['slug'])
     ch, cld = crumbs([("Home", "/"), ("Gifts", "/gifts/"), (g['title'], f"/gifts/{g['slug']}/")])
     write(f"/gifts/{g['slug']}/", head(f"{g['title']} | Mom Tried These", f"{g['role']} {len(it)} picks.", f"/gifts/{g['slug']}/", [cld], img=f"/img/c/{g['slug']}-wide.jpg") +
-          f'''<main><section class="chero" style="--w:url(/img/c/{g['slug']}-wide.jpg);--q:url(/img/c/{g['slug']}.jpg)"><div class="wrap"><div class="chbox">{ch}<span class="k">{E(g['kicker'])}</span><h1>{E(g['title'])}</h1><p class="lede">{E(g['role'])}</p></div></div></section>
+          f'''<main><section class="chero" style="--w:url(/img/c/{g['slug']}-wide.jpg);--q:url(/img/c/{g['slug']}.jpg);background-color:rgb{TINTS.get(g['slug'])}"><div class="wrap"><div class="chbox">{ch}<span class="k">{E(g['kicker'])}</span><h1>{E(g['title'])}</h1><p class="lede">{E(g['role'])}</p></div></div></section>
 <section class="wrap"><div class="grid g3 top">{''.join(card(p, k + 1) for k, p in enumerate(it))}</div></section></main>''' + FOOT)
 
 # ---- Journal
@@ -274,7 +276,7 @@ JS = {o['slug'] for o in J}
 for s in JS: OLDPOST.setdefault(s, f'/journal/{s}/')
 for s, to in OLDPOST.items(): OLDMAP[f'/blog/{s}/'] = to
 for a in os.listdir('data') if False else []: pass
-ht = open('static/php/htaccess-base').read() + '\n' + ''.join(f'Redirect 301 {a} {SITE}{b}\n' for a, b in OLDMAP.items()) + 'RedirectMatch 301 ^/lists/(.*)$ https://momtriedthese.com/collections/\nRedirectMatch 301 ^/themes/(.*)$ https://momtriedthese.com/collections/\nRedirectMatch 301 ^/gifts-for-(.*)$ https://momtriedthese.com/gifts/christmas/\n'
+ht = open('static/php/htaccess-base').read() + '\n' + ''.join(f'RedirectMatch 301 ^{re.escape(a)}?$ {SITE}{b}\n' for a, b in OLDMAP.items()) + 'RedirectMatch 301 ^/lists/(.*)$ https://momtriedthese.com/collections/\nRedirectMatch 301 ^/themes/(.*)$ https://momtriedthese.com/collections/\nRedirectMatch 301 ^/gifts-for-(.*)$ https://momtriedthese.com/gifts/christmas/\n'
 open(f'{OUT}/.htaccess', 'w').write(ht)
 
 # ---- extras
