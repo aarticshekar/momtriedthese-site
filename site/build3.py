@@ -99,7 +99,7 @@ def head(title, desc, path, schema=(), img="/og.jpg", noindex=False):
     url = SITE + path; t = title if len(title) <= 62 else title.split(' | ')[0]
     nav = ''.join(f'<a href="{h}"{" aria-current=page" if path.startswith(h) else ""}>{n}</a>' for n, h in NAV)
     sch = ''.join(f'<script type="application/ld+json">{json.dumps(s)}</script>' for s in schema)
-    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="p:domain_verify" content="23cb3eb23d3625355cafdcaa68082097"/>
 <title>{E(t)}</title><meta name="description" content="{E(desc)}"><link rel="canonical" href="{url}">{'<meta name="robots" content="noindex">' if noindex else ''}
 <meta property="og:type" content="website"><meta property="og:site_name" content="Mom Tried These"><meta property="og:title" content="{E(t)}"><meta property="og:description" content="{E(desc)}"><meta property="og:url" content="{url}"><meta property="og:image" content="{SITE}{img}"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg"><link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Mom Tried These">
