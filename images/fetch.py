@@ -5,7 +5,7 @@ import csv, io, os, re, json, urllib.parse, requests, time
 from bs4 import BeautifulSoup
 from PIL import Image, ImageDraw
 UA={'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126 Safari/537.36','Accept-Language':'en-US,en;q=0.9','Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8'}
-BAD=('amazon.','amzn','ebay.','aliexpress','temu.','walmart.com/ip','pinterest.','youtube.','facebook.','instagram.','reddit.','tiktok.')
+BAD=('media-amazon','ssl-images-amazon','images-na.ssl','amazon.','amzn','ebay.','aliexpress','temu.','walmart.com/ip','pinterest.','youtube.','facebook.','instagram.','reddit.','tiktok.')
 os.makedirs('images/out',exist_ok=True)
 S=requests.Session(); S.headers.update(UA)
 def get(u,**k): r=S.get(u,timeout=25,**k); r.raise_for_status(); return r
@@ -48,6 +48,20 @@ def search(q,dom=None):
         pref=[l for l in links if dom in urllib.parse.urlparse(l).netloc]
         links=pref+[l for l in links if l not in pref]
     return links[:4]
+
+def bing_images(q,dom=None):
+    r=get('https://www.bing.com/images/search',params={'q':q,'form':'HDRSC2','first':'1'})
+    out=[]
+    for a in BeautifulSoup(r.text,'html.parser').select('a.iusc'):
+        try: m=json.loads(a.get('m','{}'))
+        except Exception: continue
+        mu,pu=m.get('murl',''),m.get('purl','')
+        if not mu.startswith('http') or any(b in mu or b in pu for b in BAD): continue
+        out.append((mu,pu))
+    if dom:
+        pref=[x for x in out if dom in urllib.parse.urlparse(x[1]).netloc or dom in urllib.parse.urlparse(x[0]).netloc]
+        out=pref+[x for x in out if x not in pref]
+    return out[:6]
 def book(spec):
     t,_,a=spec.partition(' by ')
     j=get('https://openlibrary.org/search.json',params={'title':t,'author':a,'limit':5}).json()
@@ -72,14 +86,22 @@ for slug,src in rows:
     try:
         kind,_,val=src.partition(':')
         if kind=='url': b,u=og(val)
-        elif kind=='book': b,u=book(val)
-        elif kind=='q':
-            q,_,dom=val.partition('|'); err=None
-            for l in search(q,dom or None):
-                try: b,u=og(l); fit(b,dst); break
-                except Exception as e: err=e; continue
-            else: raise Exception(f'search failed {err}')
-            log.append([slug,'ok',u]); time.sleep(1.2); continue
+        elif kind in ('q','book'):
+            if kind=='book':
+                try: b,u=book(val); fit(b,dst); log.append([slug,'ok',u]); continue
+                except Exception: q,dom=val.replace(' by ',' ')+' book cover',None
+            else: q,_,dom=val.partition('|'); dom=dom or None
+            err=None; done=False
+            for mu,pu in bing_images(q,dom):
+                try:
+                    b=get(mu,headers={'Referer':pu}).content; fit(b,dst); log.append([slug,'ok',mu+' | '+pu]); done=True; break
+                except Exception as e: err=e
+            if not done:
+                for l in search(q,dom):
+                    try: b,u=og(l); fit(b,dst); log.append([slug,'ok',u+' | '+l]); done=True; break
+                    except Exception as e: err=e
+            if not done: raise Exception(f'all sources failed {err}')
+            time.sleep(0.8); continue
         fit(b,dst); log.append([slug,'ok',u])
     except Exception as e:
         log.append([slug,'fail',f'{src} :: {e}'[:300]])
