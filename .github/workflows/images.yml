@@ -1,0 +1,20 @@
+name: fetch-images
+on:
+  push:
+    branches: [factory]
+    paths: ['images/manifest.tsv']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: factory}
+      - run: pip install pillow requests beautifulsoup4
+      - run: python3 images/fetch.py
+      - run: |
+          git config user.name "Mom Tried These"; git config user.email "momtriedthese@gmail.com"
+          git add images/ && git commit -m "Fetched product images" || echo nothing
+          git push
