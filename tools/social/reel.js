@@ -25,6 +25,6 @@ for(const r of R){const S2=[{d:2.6,kind:'hook',h:`<img class="bg zoom" src="${im
  const n=Math.round(T*FPS);for(let f=0;f<n;f++){await p.evaluate(t=>window.seek(t),f/FPS);await p.screenshot({path:fr+'/'+String(f).padStart(5,'0')+'.jpg',type:'jpeg',quality:88});}
  await p.evaluate(t=>window.seek(t),1.8);await p.screenshot({path:`${OUT}/${r.id}-cover.jpg`,type:'jpeg',quality:90});
  execSync(`ffmpeg -y -loglevel error -framerate ${FPS} -i ${fr}/%05d.jpg -f lavfi -i anullsrc=r=44100:cl=stereo -shortest -c:v libx264 -preset veryfast -crf 20 -pix_fmt yuv420p -c:a aac -movflags +faststart ${OUT}/${r.id}.mp4`);
- fs.writeFileSync(`${OUT}/${r.id}-captions.txt`,`INSTAGRAM REEL CAPTION\n${r.cap}\n\nAdd a trending sound in the app (the video is silent).\n\nYOUTUBE SHORTS\nTitle: ${r.yt}\nDescription: ${r.cap.split('\\n\\n')[0]} Full list: ${r.url||"https://momtriedthese.com/gifts/christmas/"}\nAs an Amazon Associate I earn from qualifying purchases.\n`);
+ fs.writeFileSync(`${OUT}/${r.id}-captions.txt`,`INSTAGRAM REEL CAPTION\n${r.cap}\n\nAdd a trending sound in the app (the video is silent).\n\nYOUTUBE SHORTS\nTitle: ${r.yt}\nDescription: #ad ${r.cap.split('\n\n')[0]} Full list: ${r.url||"https://momtriedthese.com/gifts/christmas/"}\nAs an Amazon Associate I earn from qualifying purchases.\n`);
  fs.rmSync(fr,{recursive:true,force:true});console.log('ok',r.id,T.toFixed(1));}
 await b.close();})();
