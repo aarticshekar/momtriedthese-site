@@ -308,4 +308,70 @@ One thing off the screen every day. A walk, a game, a craft, a book before bed. 
 Do that, and the rest is fine.
 
 Nobody is grading you. And if they are, they're not your people."""),
+dict(slug="stocking-stuffers-for-kids", kind="list", date="2026-11-06", short="Stocking stuffers",
+ title="Stocking Stuffers for Kids 6 to 10 That Don't End Up in the Bin",
+ desc="Small things that get played with on Boxing Day and still turn up in March. Ten picks, and why each one earned a spot.",
+ body="""The stocking is where the junk sneaks in. A tiny plastic thing here, a novelty pen there, and by New Year it's all in a drawer you don't open.
+
+So here's the test for every small thing: will they reach for it again next week? If not, it's packaging.
+
+## Things to squish
+
+The fidget that lasts is the one that feels good in a pocket during homework.
+
+[[needoh-teenie]]
+[[needoh-cube]]
+
+## Games that fit in a pocket
+
+A deck or a small game in every stocking means there's always something for the restaurant table.
+
+[[uno]]
+[[spot-it]]
+
+## Brain teasers
+
+For the kid who likes a puzzle they can solve alone in the car.
+
+[[tic-tac-toe-bolt]]
+[[speed-cube]]
+
+## Quiet making
+
+Small, washable, and fine on a plane tray.
+
+[[wikki-stix]]
+[[pip-squeaks]]
+
+## Two for a rainy afternoon
+
+[[globbles]]
+[[shut-the-box]]
+
+Pick three. A stocking with three good things beats one stuffed to the top with ten forgettable ones."""),
+
+dict(slug="the-want-list", kind="note", date="2026-11-06",
+ title="The Want List: What to Do When Every Ad Becomes an I Want",
+ desc="For the season when every advert, aisle and friend's birthday party ends in a new request.",
+ body="""It starts around now. An advert, a toy aisle, a friend's new thing. And then, every day, a new I want.
+
+You don't have to say no to each one. You don't have to say yes either.
+
+## Try this today
+
+Put a sheet of paper on the fridge. Call it the want list.
+
+Every time they ask for something, it goes on the list. No debate, no lecture. Just: write it down.
+
+## Then wait a week
+
+Read the list together next Saturday. Half of it, they won't remember asking for. A few things they'll cross off themselves, a little embarrassed.
+
+What survives a week is a real want. That's the useful part.
+
+## The small truth
+
+Kids don't always need the thing. They need to know you heard them.
+
+The list does that. It says: I heard you, and it's written down. Most of the time, that's enough."""),
 ]

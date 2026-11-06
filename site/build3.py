@@ -7,6 +7,8 @@ from journal import J
 from journal2 import J2
 J = J2 + J
 LISTS = [o for o in J if o['kind'] == 'list']
+AGEL = [o for o in LISTS if re.fullmatch(r'gifts-for-\d+-year-olds', o['slug'])]
+MOREL = [o for o in LISTS if o not in AGEL]
 JV = [o for o in J if o['kind'] != 'list']   # the journal: voice first
 from popular import POP, POPULAR_EXISTING, GIFT_SEC, SECTIONS
 from picks2 import P2
@@ -260,7 +262,7 @@ def gift_body(g, it):
 GL = [g for g in GIFT.values() if in_home(g['slug'])]
 write('/gifts/', head("Gift Guides by Occasion | Mom Tried These", "Gift lists by occasion: Christmas picked early, Diwali far from home and party bags kids keep.", "/gifts/") +
       f'''<main class="wrap"><section class="intro"><h1>Gifts</h1><p class="lede">Lists for a moment, not for every day. Each one is its own short set of products.</p>
-<div class="ages"><p class="k">Gifts by age</p><div class="gnav">{''.join(f'<a href="/journal/{o["slug"]}/">{E(o["slug"].split("-")[2])} year olds</a>' for o in sorted(LISTS, key=lambda o: int(o['slug'].split('-')[2])))}</div></div>{SLBAR}</section>
+<div class="ages"><p class="k">Gifts by age</p><div class="gnav">{''.join(f'<a href="/journal/{o["slug"]}/">{E(o["slug"].split("-")[2])} year olds</a>' for o in sorted(AGEL, key=lambda o: int(o['slug'].split('-')[2])))}</div></div>{f'<div class="ages"><p class="k">More gift lists</p><div class="gnav">' + ''.join(f'<a href="/journal/{o["slug"]}/">{E(o.get("short", o["title"]))}</a>' for o in MOREL) + '</div></div>' if MOREL else ''}{SLBAR}</section>
 {''.join(f'<a class="gban" href="/gifts/{g["slug"]}/" style="--w:url(/img/c/{g["slug"]}-wide.jpg);--q:url(/img/c/{g["slug"]}.jpg)"><div class="sc"><span class="k">{E(g["kicker"])}</span><h2>{E(g["title"])}</h2><p>{E(g["role"])}</p><span class="go">Open the list →</span></div></a>' for g in GL)}</main>''' + FOOT)
 for g in GL:
     it = in_home(g['slug'])
