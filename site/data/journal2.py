@@ -374,4 +374,49 @@ What survives a week is a real want. That's the useful part.
 Kids don't always need the thing. They need to know you heard them.
 
 The list does that. It says: I heard you, and it's written down. Most of the time, that's enough."""),
+dict(slug="white-friday-black-friday-screen-free-gifts", kind="list", date="2026-11-12", short="White Friday and Black Friday",
+ title="Screen-Free Gifts Worth Buying on White Friday and Black Friday",
+ desc="The big-ticket, screen-free gifts worth adding to your list before White Friday and Black Friday on 27 November, and why each one earned a spot.",
+ body="""White Friday and Black Friday land on 27 November this year. The trick is to walk in with a list, not a mood.
+
+So this is the list: the bigger, screen-free gifts that are worth waiting for. Things they'll still be using in March, not things that look good in a cart at midnight.
+
+Deals change by the hour, so there are no prices here. Check the price on the day, and only buy what was already on your list.
+
+## The big ones worth waiting for
+
+The toy that grows with them, and the one that replaces the bedtime tablet.
+
+[[magnetic-tiles]]
+[[yoto]]
+
+## For the kid who builds
+
+A set they can rebuild three ways, and a robot that teaches them to code with blocks, not a screen.
+
+[[lego-shuttle]]
+[[apitor]]
+
+## For the whole table
+
+Games the grown-ups will happily play twice.
+
+[[hues-cues]]
+[[flip-7]]
+
+## For the maker
+
+Real making, with something that works at the end.
+
+[[3doodler]]
+[[robotic-hand]]
+
+## For the quiet hour
+
+Puzzles a kid can do alone, at a table, while you drink your coffee hot.
+
+[[shashibo]]
+[[mapology]]
+
+Pick the two that fit your kid best, add them to your list tonight, and leave the rest of the sale alone."""),
 ]

@@ -209,11 +209,14 @@ TOPPOP = TOPPOP[:6]
 slides = ''.join(f'''<a class="slide{' on' if i == 0 else ''}" href="/gifts/{g['slug']}/" style="--w:url(/img/c/{g['slug']}-wide.jpg);--q:url(/img/c/{g['slug']}.jpg)"><div class="sc"><span class="k">{E(g['kicker'])}</span><h2>{E(g['banner'])}</h2><p>{E(g['role'])}</p><span class="go">Open the list <span aria-hidden="true">→</span></span></div></a>''' for i, g in enumerate(SEASON))
 dots = ''.join(f'<button class="{"on" if i == 0 else ""}" aria-label="Show banner {i + 1}"></button>' for i in range(len(SEASON)))
 START = ['quiet-hour', 'lunchbox', 'travel-day', 'game-night', 'fast-kitchen', 'just-for-you']
+import datetime as _dt
+WFBF = '' if _dt.date.today() > _dt.date(2026, 11, 28) else '''<section class="wrap sec"><div class="sh"><h2>White Friday and Black Friday, 27 November</h2><a href="/journal/white-friday-black-friday-screen-free-gifts/">Open the list <span aria-hidden="true">→</span></a></div><p class="subf">The screen-free gifts worth waiting for, and why each one earned a spot. Make the list now, buy on the day.</p></section>'''
 latest = [o for o in JV if o['kind'] == 'note'][:2] + [next(o for o in JV if o['kind'] == 'idea')]
 home = head("Mom Tried These: The Short List for Busy Moms", "A short, honest list of things for kids, home and the mom running both. Every pick has a reason, and if we bought it, we say so.", "/",
             [{"@context": "https://schema.org", "@type": "WebSite", "name": "Mom Tried These", "url": SITE}]) + f'''<main>
 <section class="hero"><div class="wrap"><p class="k">Hi. This is the short list.</p><h1>Fewer things, <em>better chosen.</em></h1><p class="lede">I research everything like it's a big decision, even the lunchbox. This is what made the cut, and why. If we bought it, it says so.</p></div></section>
 <div class="wrap">{SLBAR}</div>
+{WFBF}
 <section class="wrap"><div class="slides">{slides}<div class="dots">{dots}</div></div></section>
 <section class="wrap sec"><div class="sh"><h2>Start with what you need</h2><a href="/collections/">All collections</a></div><div class="tiles">
 {''.join(f'<a class="tile" href="/collections/{s}/"><img src="/img/c/{s}.jpg" alt="" width="900" height="900" loading="lazy"><span class="k">{E(COLL[s]["kicker"])}</span><h3>{E(COLL[s]["title"])}</h3></a>' for s in START)}</div></section>
