@@ -419,4 +419,76 @@ Puzzles a kid can do alone, at a table, while you drink your coffee hot.
 [[mapology]]
 
 Pick the two that fit your kid best, add them to your list tonight, and leave the rest of the sale alone."""),
+dict(slug="gifts-for-5-year-olds", kind="list", date="2026-11-13", short="Gifts for 5 year olds",
+ title="Gifts for 5 Year Olds That Hold Their Attention Past Lunch",
+ desc="Building, making, games they can win and stories without a screen: ten gifts for a five year old, and why each one is on the list.",
+ body="""Five is a funny age to buy for. Too big for baby toys, a bit small for the box that says 6 and up, and very sure about what they like.
+
+So every gift here passes one test: can a five year old play with it, mostly on their own, for longer than it took to unwrap?
+
+## If they build
+
+One toy that grows with them for years, and a puzzle that keeps its pieces together in the car.
+
+[[magnetic-tiles]]
+[[magnetic-tangrams]]
+
+## If they make
+
+Art that looks impressive to them and stays tidy for you. No glue, no paint water to knock over.
+
+[[aqua-puffs]]
+[[foil-fun]]
+
+## Games a five year old can win fairly
+
+At five, winning a real game against a grown-up is a big deal. These are fair, fast and easy to explain.
+
+[[connect-4]]
+[[spot-it]]
+
+## Stories without a screen
+
+They choose the story, press play and listen on their own. Bedtime gets a little easier.
+
+[[yoto]]
+[[tonies]]
+
+## For early mornings and long drives
+
+A clock that answers "is it time to get up yet?", and a drawing board that wipes clean.
+
+[[mella]]
+[[eoocoo-tablet]]
+
+Pick two. Five year olds play hardest with the few things they love, not the pile."""),
+
+dict(slug="make-room-before-the-gifts-arrive", kind="note", date="2026-11-13",
+ title="Make Room Before the Gifts Arrive",
+ desc="A gentle way to clear some space with your kids before December, without tears or a secret bin bag.",
+ body="""In a few weeks, new things will come through the door. Birthdays, Christmas, the aunty who always overdoes it.
+
+Before that happens, make a little room. With them, not behind their back.
+
+## Try this today
+
+Give them a box and one question: which toys are ready for a new kid?
+
+Not "what can we throw away". Ready for a new kid. It's a different question, and they answer it differently.
+
+## Let them choose
+
+You'll want to step in. The broken car stays, the toy you paid good money for goes. Let it be.
+
+If they pick three things, that's three things. The point isn't an empty shelf. It's practice at letting go of something on purpose.
+
+## Then take it together
+
+Let them carry the box to wherever it's going. A cousin, a neighbour, a donation point. Giving feels real when they see where it goes.
+
+## The small truth
+
+Kids don't need fewer things as much as they need to know their things have a place.
+
+Make the place first. The new things will find it."""),
 ]
