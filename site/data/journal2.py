@@ -491,4 +491,82 @@ Let them carry the box to wherever it's going. A cousin, a neighbour, a donation
 Kids don't need fewer things as much as they need to know their things have a place.
 
 Make the place first. The new things will find it."""),
+dict(slug="science-gifts-for-kids-6-to-10", kind="list", date="2026-11-20", short="Science gifts for kids",
+ title="Science Gifts for Kids 6 to 10 That End in Something That Works",
+ desc="Ten science and building gifts for curious kids, from first experiments to real circuits, and why each one made the list.",
+ body="""Some kids don't want another toy. They want to know how the toy works.
+
+Every gift here ends in something real: a crystal they cracked open, a circuit that lights up, a machine they built that actually moves. No sticker-on-a-box science.
+
+## For the six and seven year olds
+
+Small experiments and a garden they look after themselves. Short wins, so they come back for more.
+
+[[science-kit]]
+[[mini-garden]]
+
+## Crack it, mix it, find out
+
+The wow comes first, and the explanation is right there when they ask why.
+
+[[geodes]]
+[[magic-chemistry]]
+
+## Build something that works
+
+Real circuits and a real pinball machine. The best part is when it works on the second try.
+
+[[snap-circuits]]
+[[pinball]]
+
+## Engineering with a payoff
+
+Gears, motors and one machine that crushes things on purpose. For the kid who takes the remote apart.
+
+[[crunchlabs]]
+[[gear-bots]]
+
+## Long projects for a determined kid
+
+These take more than one afternoon. That's the point.
+
+[[robotic-hand]]
+[[solar-robot]]
+
+Pick one that matches where they are now, not where the box says they should be. A kit they finish beats a harder one that waits on the shelf."""),
+
+dict(slug="let-them-choose-a-gift-for-someone-else", kind="note", date="2026-11-20",
+ title="Let Them Choose a Gift for Someone Else",
+ desc="Before December fills up with things they want, give your kid one small job: choosing a gift for someone else.",
+ body="""December is full of their wish lists. Circled catalogue pages, long lists, the thing a friend has.
+
+This week, flip it. Give them one gift to choose for someone else.
+
+## Try this today
+
+Pick one person together. A teacher, a grandparent, the cousin, the friend who sits next to them.
+
+Then ask one question: what does this person like?
+
+Not what would you like. What would they like. Watch them think about it. That pause is the whole lesson.
+
+## Give them a small budget
+
+A real number, small enough that they have to choose. Let them do the sums.
+
+If they pick something you wouldn't, let it go. A teacher getting a slightly odd mug, chosen with care, is better than a perfect one you chose.
+
+## Let them wrap it
+
+Wonky tape, too much paper, a card in their handwriting. It looks homemade because it is.
+
+## Then let them hand it over
+
+They need to see the face when it's opened. That's what makes giving feel as good as getting.
+
+## The small truth
+
+Kids learn generosity the same way they learn everything else. By doing it, a bit badly, more than once.
+
+One gift this year. Two next year. You're not raising a kid who wants less. You're raising one who thinks about other people."""),
 ]
