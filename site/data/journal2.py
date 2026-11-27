@@ -569,4 +569,79 @@ They need to see the face when it's opened. That's what makes giving feel as goo
 Kids learn generosity the same way they learn everything else. By doing it, a bit badly, more than once.
 
 One gift this year. Two next year. You're not raising a kid who wants less. You're raising one who thinks about other people."""),
+dict(slug="family-games-for-christmas-day", kind="list", date="2026-11-27", short="Family games for Christmas",
+ title="Family Games for Christmas Day That Kids 6 to 10 Can Win",
+ desc="Ten quick family games for Christmas Day and the long evenings after, picked so a six year old and a grandparent can play at the same table.",
+ body="""Christmas afternoon has a slump. The wrapping is in a pile, the grown-ups want to sit, and the kids want someone to play with.
+
+A game on the table fixes that. These are short, easy to explain while someone is still finding their glasses, and every one can be won by a kid. That last part matters. Nobody stays at the table to lose every round.
+
+## Under five minutes to learn
+
+For the youngest player and the relative who says they don't play games.
+
+[[spot-it]]
+[[taco-cat]]
+
+## Loud, fast and everyone plays at once
+
+No waiting for your turn, so no one drifts off to a screen.
+
+[[train-of-thought]]
+[[exploding-kittens]]
+
+## A little bit of strategy
+
+For the eight and nine year olds who want to beat you properly now.
+
+[[flip-7]]
+[[monopoly-deal]]
+
+## Quiet games for the evening
+
+Words, colours and numbers, for when the room has calmed down.
+
+[[hues-cues]]
+[[bananagrams]]
+
+## Two for the table after lunch
+
+One for suspense, one for the questions nobody asks at dinner.
+
+[[jenga]]
+[[tales-cards]]
+
+Wrap one game to open first, before the big gifts. It sets the tone for the day: we're here together, not each on our own pile."""),
+
+dict(slug="leave-one-december-weekend-empty", kind="note", date="2026-11-27",
+ title="Leave One December Weekend Empty",
+ desc="December fills up fast. Before it does, block one weekend with nothing in it, and protect it like a plan.",
+ body="""December is about to fill up. Class parties, concerts, the dinner you said yes to in October, the shopping trip, the one more thing.
+
+Before it does, take out the calendar and block one weekend. Write nothing in it except a line through both days.
+
+## Why it has to be blocked, not hoped for
+
+An empty weekend never survives on its own. Someone will ask, and it will look free, and you'll say yes.
+
+If it's already blocked, the answer is easy. We have plans. You do. The plan is nothing.
+
+## What the empty weekend is for
+
+Pyjamas until lunch. The film they've asked for three times. The cardboard box from a delivery turning into a rocket. A walk with no destination.
+
+Kids remember the busy December less than you'd think. They remember the slow morning when nobody had to be anywhere.
+
+## Try this today
+
+Open your calendar now, before the weekend. Pick the emptiest one left in December. Block it.
+
+Then tell the kids. Let them help decide what nothing looks like. One will want a fort. One will want hot chocolate at ten in the morning. Both count.
+
+## The small truth
+
+You don't need a better plan for December. You need a little less of it.
+
+One weekend. Guard it like it's the most important thing on the calendar, because for them, it might be."""),
 ]
+
